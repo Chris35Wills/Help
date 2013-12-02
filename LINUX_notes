@@ -1,0 +1,82 @@
+LINUX notes
+===========
+
+Say you run a programme from a given console and you want to run something else
+at the same time - you can do the following in order:
+
+Ctrl + z		Pauses what is running
+bg				Starts the process again but puts it in the background
+
+...you can now use the command line again to start something else (which can
+also be put in the background
+
+You can then type:
+
+jobs			To see what is running
+fg 1			To bring job one back to the foreground
+
+------------------------------------------------------
+
+Ctrl + c					Closes the foreground task
+csh name_of_script.csh		Runs a c shell script
+nedit name_of_script.csh	Opens a specified file using a given programme (int
+							this case, nedit)
+top							shows you what is running (can be sorted by
+							processes and memory usage using capitals P and M 
+							respectively)			
+history 10					echo the last 10 commands 
+man gawk					access a manual (of gawk in this example) - to move
+							through the manual use "n", quit using a "q" and 
+							search for a word or character
+
+ls							List files in a directory
+ls -l						List files in a directory + directories
+ls -lh						List files in a directory + directories + size
+							(in a readable format)
+ls -la						List files in a directory + hidden files
+rm -rf <filename>			Delete specificied file
+rm -Ri <folderpath>			Delete folder at specified path
+
+ls rm -f $dataset/h* 		lists what is to be removed without removing it
+ls rm -f  $dataset/m* 		lists what is to be removed without removing it
+
+rm -f $dataset/h* 			remove all files in directory $database that begin with "h"
+rm -f  $dataset/m* 			remove all files in directory $database that begin with "m"
+							
+'...'						Quotes eactly what is written betwen the '..'
+"..."						Quotes what is written betwen the ".." but if
+							variables, these will still be used as such
+
+-----------------------------------------------------
+Logging into other machines from the Konsole
+
+cd /geog/data				Enter this and then "ls" and you'll get a list 
+							of computers available in the network
+ssh nameofcomputer 			Will get you access to a computer in the network 
+							Say yes to security question and then enter your
+							password
+							
+-----------------------------------------------------
+
+mkdir foobar				Makes new direcory 'foobar'
+mv nz* foobar				Moves all files in a directory with prefix of nz 
+							(regardless of what follows) to the directory of foobar
+							- make sure you are in the directory of the *nz files!
+							
+-----------------------------------------------------
+
+echo grd2xyz variable variable variable 	Rather than run the command grd2xyz, 
+											prefixing echo will print out exactly 
+											what is being passed into it
+											
+-----------------------------------------------------
+
+which programmeName			Gives you the path directoy
+
+-----------------------------------------------------
+
+ls *d *.geo > list_geo								Create list of all things with suffix .geo
+ls *d *.dem_par > list_dem_par						Create list of all things with suffix .dem_par
+paste list_geo list_dem_par > list_multi_mosaic		Combine lists ino 1 list called list_multi_mosaic
+											
+											

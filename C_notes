@@ -1,0 +1,11 @@
+C programming help
+==================
+
+IMPORTANT: Any programme written in C (or altered) must be (re)compiled before it is executed
+	(i) write your file and save as filename.c
+	(ii) in bash type cc filename.c
+	
+	... the programme can now be called from a script and run or whatever
+	
+Helpful websites
+================
