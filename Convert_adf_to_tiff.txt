@@ -1,0 +1,9 @@
+Convert adf to tiff
+===================
+
+Assume file name dblbnd.adf:
+
+ qgis dblbnd.adf 						# Open in qgis
+ gdal_translate dblbnd.adf dblbnd.tiff				# Convert adf to tiff
+ gdalinfo dblbnd.tiff						# Extract meta data from tiff
+		

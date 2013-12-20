@@ -31,6 +31,16 @@ man gawk					access a manual (of gawk in this example) - to move
 
 ls							List files in a directory
 ls -l						List files in a directory + directories
+
+****************************
+NB/ If you have a directory problem e.g. " /tmp/temp_coords: Permission denied. " just type:
+
+> ls -h /tmp/temp_coords
+
+... and this will give you details with regard to permissions of the file (maybe you can't 
+access it because you don;t have the permission!) 
+****************************
+
 ls -lh						List files in a directory + directories + size
 							(in a readable format)
 ls -la						List files in a directory + hidden files
@@ -42,11 +52,20 @@ ls rm -f  $dataset/m* 		lists what is to be removed without removing it
 
 rm -f $dataset/h* 			remove all files in directory $database that begin with "h"
 rm -f  $dataset/m* 			remove all files in directory $database that begin with "m"
+
+cp -c blah1/ blah2/blah3			copy blah1 to within blah3 - use flags (e.g. -c) when dealing with folders
+rsync -av /source/data/ target/		a better way to copy (everything) - have a look at the flags (-av is copy everything and verbose)
 							
 '...'						Quotes eactly what is written betwen the '..'
 "..."						Quotes what is written betwen the ".." but if
 							variables, these will still be used as such
+							
+"df -h "					States how much memory is in use (total system usage)
 
+ps							Gives a list of processes and associated IDs
+pgreb firefox				Gets the process ID of firefox (you could type any
+							programme)
+kill 22349					Kills process of number 22349
 -----------------------------------------------------
 Logging into other machines from the Konsole
 
