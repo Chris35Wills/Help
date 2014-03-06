@@ -1,1 +1,7 @@
 /usr/local/GAMMA_SOFTWARE-20101204/Gamma_documentation.html
+
+cpx_to_real		converts complex float images to normal float images (look at the DISP library)
+ras8_float		useful for creating rasters (look at the DISP library)
+ras24_float		useful for creating rasters (look at the DISP library)
+lin_comb		used to combine float data files (can be used like a raster
+				calculator) (Land application tools)

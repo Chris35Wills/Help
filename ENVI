@@ -1,0 +1,28 @@
+=========
+ENVI HELP 
+=========
+
+Working with Landsatlook files
+------------------------------
+
+Downloaded via the GLOVIS viewer
+Often be provided with a natural colour .jpg and a thrmal image .jpg as well as
+a .wld file
+The .wld file (ESRI) can be opened up in notepad - it's format is:
+	
+	pixel x size
+	rotation about the y axis (normally 0)
+	rotation about the x axis (normally 0)
+	negative pixel Y size
+	X coordinate of upper left pixel centre
+	Y coordinate of upper left pixel centre
+	
+These values can be inserted into the header info in ENVI - the .wld file does
+not contain the name of the projection (or zone) and this can be acquired from
+the download page of the glovis site (if you click on your download on the
+site, you get a preview image as well as metadata)
+	
+	
+http://glovis.usgs.gov/ <-- standard glovis website
+http://www.gdal.org/frmt_various.html <-- lots of info on different formats including .wld files
+
