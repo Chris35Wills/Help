@@ -63,7 +63,7 @@ rsync -av /source/data/ target/		a better way to copy (everything) - have a look
 "df -h "					States how much memory is in use (total system usage)
 
 ps							Gives a list of processes and associated IDs
-pgrep firefox				Gets the process ID of firefox (you could type any
+pgreb firefox				Gets the process ID of firefox (you could type any
 							programme)
 kill 22349					Kills process of number 22349
 
