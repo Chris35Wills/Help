@@ -1,6 +1,8 @@
 LINUX notes
 ===========
 
+Ctrl + v then Ctrl + i creates a tab character equivalent
+
 Say you run a programme from a given console and you want to run something else
 at the same time - you can do the following in order:
 
@@ -61,6 +63,7 @@ rsync -av /source/data/ target/		a better way to copy (everything) - have a look
 							variables, these will still be used as such
 							
 "df -h "					States how much memory is in use (total system usage)
+du -sk name					Size of file/folder
 
 ps							Gives a list of processes and associated IDs
 pgrep firefox				Gets the process ID of firefox (you could type any
@@ -72,6 +75,11 @@ ps aux | grep firefox 		Gets the process ID of firefox (you could type any
 							may have (main or one of your tightVNC connections)
 							(This is worth using if firefox tells you it is 
 							aleady open and needs closing)
+							
+cut -c5-10 file.txt			cuts the 5th-10th characters from a text file and prints to stdout
+cut -d"	" -f3  file.txt		provides the 3rd field as designated following a tab delimiter
+		see: www.thegeekstuff.com/2013/06/cut-command-examples/
+		
 -----------------------------------------------------
 Logging into other machines from the Konsole
 

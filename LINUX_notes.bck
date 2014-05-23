@@ -1,6 +1,8 @@
 LINUX notes
 ===========
 
+Ctrl + v then Ctrl + i creates a tab character equivalent
+
 Say you run a programme from a given console and you want to run something else
 at the same time - you can do the following in order:
 
@@ -61,9 +63,10 @@ rsync -av /source/data/ target/		a better way to copy (everything) - have a look
 							variables, these will still be used as such
 							
 "df -h "					States how much memory is in use (total system usage)
+du -sk name					Size of file/folder
 
 ps							Gives a list of processes and associated IDs
-pgreb firefox				Gets the process ID of firefox (you could type any
+pgrep firefox				Gets the process ID of firefox (you could type any
 							programme)
 kill 22349					Kills process of number 22349
 
