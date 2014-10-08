@@ -23,6 +23,18 @@ for i in {99..100}; do j= printf "%0*d\n" ${#max} $i ; done
 
 Bespoke operations
 
+# Change characters in filenames - all instances of 25 changed to 50
+
+for i in *25*; do mv "$i" "${i//25/50}"; done 
+
+#Change endings of a suite of files and copy one file using the name (useful for
+duplicating .hdr files)
+
+for i in *percent.bin; do
+	base=`basename $i .bin`
+	cp file.hdr $base.hdr
+done
+
 #Concatenate bands to a specific output file
 for i in {160..170}; do cat mosaic_scripted_b$((i++)).dem > /geog/data/sirius/epsilon/ggwillc/KNS_hyperspectral_extra_processing_outputs/KNS_201a_bands160..190.bin ;done 
 

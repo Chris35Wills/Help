@@ -10,6 +10,17 @@ printf("%d\n", $2)}' <- this means "print as a decimal integer (%d) the new
 						character (\n) found in column 2 ($2)
 < $this_dem_par      <- this means "acccording to the file specifed by variable this_dem_par
 
+Get colums from file and put in another file
+============================================
+
+## Inside csh script
+## Takes the 1st and 2nd colums from file $datset and prints them, with a new line between each, into test_list.xyz
+## SEE: http://web.mit.edu/gnu/doc/html/gawk_6.html
+
+gawk 'BEGIN { ORS = "\n"} { print $1, $2 }' $dataset > ~/Desktop/test_list.xyz
+nedit ~/Desktop/test_list.xyz
+
+
 Examples of how to use a gawk command in a csh script:
 ======================================================
 
@@ -116,5 +127,27 @@ set object = "Processing $catal$number."
 set cind = `echo $object | awk '{print index($0,"ngc")}'` # = 0
 set cind = `echo $object | awk '{print index($0,"NGC")}'` # = 12
 
+4) extract details from a path and file string:
+
+###
+foreach dataset ( \
+	Lidar_time_correction/Helheim/single_strips/"$date"_lidar/xyz/*.xyz \
+	)
+	
+	echo $dataset
+	set file_name = `basename $dataset .xyz`
+	set strip_number = `echo $file_name | awk '{printf(substr($file_name, length($file_name)-1))}'` 
+	## gets the last two values of the string $file_name
+
+	echo "Date: $date"
+	echo $file_name
+	echo "Strip number: $strip_number"
+###
+	
+Prints out:
+Lidar_time_correction/Helheim/single_strips/222a_lidar/xyz/Helheim_222a_elevation_16.xyz
+Date: 222a
+Helheim_222a_elevation_16
+Strip number: 16
 
 A good csh cook book is found http://star-www.rl.ac.uk/star/docs/sc4.htx/sc4.html. I extracted a few examples here. 
