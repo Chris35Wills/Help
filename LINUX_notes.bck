@@ -1,6 +1,21 @@
 LINUX notes
 ===========
 
+Access to bashrc:
+
+nedit ~/.bashrc  - this is where the bash prompt is defined and it also holds path details
+
+------------------------------------------------------
+
+Use alias as defined in ~/.bashrc:
+
+	In a terminal:
+		> source ~/.bashrc
+		> alias_name
+		
+------------------------------------------------------
+
+
 Ctrl + v then Ctrl + i creates a tab character equivalent
 
 Say you run a programme from a given console and you want to run something else
@@ -75,6 +90,11 @@ ps aux | grep firefox 		Gets the process ID of firefox (you could type any
 							may have (main or one of your tightVNC connections)
 							(This is worth using if firefox tells you it is 
 							aleady open and needs closing)
+							
+cut -c5-10 file.txt			cuts the 5th-10th characters from a text file and prints to stdout
+cut -d"	" -f3  file.txt		provides the 3rd field as designated following a tab delimiter
+		see: www.thegeekstuff.com/2013/06/cut-command-examples/
+		
 -----------------------------------------------------
 Logging into other machines from the Konsole
 
@@ -117,9 +137,16 @@ paste list_geo list_dem_par > list_multi_mosaic		Combine lists ino 1 list called
 -----------------------------------------------------
 
 man -k pdf					Find programmes that deal with pdf files 
+xdg-open foo.pdf			Display pdf (better than evince)
 evince file2open.pdf		Allows pdf file reading from terminal
-display file2open.png		Uses ImageMagick to view a pdf file		
+display file2open.png		Uses ImageMagick to view a png file		
 
 man -k grd					Finds any programme with "grd" in the title (useful for finding newe tools etc...) <- doesn't find everything though
 							(only those with "manuals" -- i.e. can't use for finding gamma tools for example)"
-											
+
+------------------------------------------------------
+
+Search for file:
+
+find . -name \*png			Find files | in this directory (the ".") | with anything preceding "png" (wildcard * can be used but must be escaped with "\") 
+## http://www.howtogeek.com/112674/how-to-find-files-and-folders-in-linux-using-the-command-line/

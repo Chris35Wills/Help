@@ -35,6 +35,19 @@ for i in *percent.bin; do
 	cp file.hdr $base.hdr
 done
 
+...another example:
+
+TEST_image_14.21.59.png
+TEST_image_14.31.59.png
+TEST_image_14.41.59.png
+
+for i in TEST*; do base=`basename $i .png`; cp $i $base.TESTER; done
+
+TEST_image_14.51.59.TESTER
+TEST_image_14.41.59.TESTER
+TEST_image_14.31.59.TESTER
+
+
 #Concatenate bands to a specific output file
 for i in {160..170}; do cat mosaic_scripted_b$((i++)).dem > /geog/data/sirius/epsilon/ggwillc/KNS_hyperspectral_extra_processing_outputs/KNS_201a_bands160..190.bin ;done 
 
