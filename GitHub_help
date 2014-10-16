@@ -32,6 +32,17 @@ Pull files from remote to local
 # this will update the local from the remote but won't overwrite any changes you've made in the local that haven't been pushed to theremote (!)
 # this will only update files linked with github i.e. if you have other stuff in thelcoal folder no in github, this won't be overwritten (so you won't lose stuff)
 
+-------------------
+Fix merge conflicts
+-------------------
+
+Occurs where a file in a repo is changesd but differs from the version in the repo (that was never pulled in before changes were made)
+Where this occurs:
+1. git mergetool
+2. COnflict regions are highlighted in document in an editor that will pop up - make alterations (i.e. address conflict) and then save
+3. Now try and push again...
+4. If still not working, search "fix github merge conflict"
+
 =============
 Quick summary
 =============
