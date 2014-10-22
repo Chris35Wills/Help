@@ -1,0 +1,60 @@
+======================
+Linux GitHub interface
+======================
+
+----------------------------
+First time depository set-up
+----------------------------
+
+1. Change your directory to that which you would like to have as a repository
+2. to set as repository > git init ## this creates a hidden file that allows github to track the repository you've just initialised
+3. to add files > git add [file.extension] ## you can replace file.extension with wildcards e.g. *.bil
+4. to commit added files > git commit -m "Whatever you want to see associated with the tracked change" ## see glossary - the '-m "blah"' is the commit message
+5. to link repository (local) with remote > git remote add origin http://..... # the path can be accessed from a newly set up repo on the github website
+6. to push files to remote type > git push -u origin master
+
+NB/ origin is essentially the local folder and master is the remote
+
+-----------------------
+Day to day file update
+-----------------------
+
+1. Change some stuff
+2. to add files > git add [file.extension] ## you can replace file.extension with wildcards e.g. *.bil
+3. to commit added files > git commit -m "Whatever you want to see associated with the tracked change"
+4. to push type > git push
+
+-------------------------------
+Pull files from remote to local
+-------------------------------
+
+1. just type > git pull # assumes your already in the repository
+# this will update the local from the remote but won't overwrite any changes you've made in the local that haven't been pushed to theremote (!)
+# this will only update files linked with github i.e. if you have other stuff in thelcoal folder no in github, this won't be overwritten (so you won't lose stuff)
+
+=============
+Quick summary
+=============
+
+git add - tells it that a change is to be part of a commit
+git commit - saves a version to the history (doesn't change anything to the remote unless pushed)
+git push - copies local to remote
+git status - tells you what is going on
+
+git remote rm origin - remove origin (if you want to create a new one)
+
+Glossary
+========
+
+ADD
+Adds a new file to a list that will be committed....
+
+COMMIT
+A commit, or "revision", is an individual change to a file (or set of files). It's like when you save a file, except with Git, every time you save it creates a unique ID (a.k.a. the "SHA" or "hash") that allows you to keep record of what changes where made when and by who. Commits usually contain a commit message which is a brief description of what changes were made.
+
+PULL
+Pull refers to when you are taking in changes. For instance, if someone has edited the remote file you're both working on, you'll want to pull in those changes to your local copy so that it's up to date.
+
+PUSH
+Pushing refers to sending your committed changes to a remote repository such as GitHub.com. For instance, if you change something locally, you'd want to then push those changes so that others may access them.
+

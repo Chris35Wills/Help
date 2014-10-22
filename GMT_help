@@ -1,0 +1,28 @@
+Useful gmt tools
+================
+
+grdmath - grd maths operations (multiple options)
+grdinfo	- get info for a given grd file
+grd2xyz	- convert grd to an xyz binary (see options)
+
+Example - convert a grid to binary to view in Envi....
+======================================================
+
+>grdinfo boolean_file_TEMP_202.grd # Returns info on the file
+
+	boolean_file_TEMP_202.grd: Title: /geog/data/sirius/epsilon/ggwillc/LIDAR_TIME_CORRECTION_TEMP/Helheim/single_str
+	boolean_file_TEMP_202.grd: Command: grdmask -V -R532952/539817/7363162/7364418 -I0.500000/0.500000 -G/geog/data/sirius/epsilon/ggwillc/LIDAR_TIME_CORRECTION_TEMP/	Helheim/single_strips/223-_lidar/grd/boolean_file_TEMP_202.grd
+	boolean_file_TEMP_202.grd: Remark: 
+	boolean_file_TEMP_202.grd: Gridline node registration used
+	boolean_file_TEMP_202.grd: Grid file format: nf (# 18) GMT netCDF format (float)  (COARDS-compliant) [DEFAULT] 
+	boolean_file_TEMP_202.grd: x_min: 532952 x_max: 539817 x_inc: 0.5 name: x nx: 13731
+	boolean_file_TEMP_202.grd: y_min: 7363162 y_max: 7364418 y_inc: 0.5 name: y ny: 2513
+	boolean_file_TEMP_202.grd: z_min: 0 z_max: 1 name: z
+	boolean_file_TEMP_202.grd: scale_factor: 1 add_offset: 0
+
+> grd2xyz boolean_file_TEMP_202.grd -R532952/539817/7363162/7364418 -Zf > ./temp_bin_mask.bin # Creates binary version of the grid file
+
+... You can then open this in ENVI- will require some header info which can be taken from the grdinfo output:
+	nx: 13731			- cols   (ENVI hdr)
+	ny: 2513			- lines  (ENVI hdr)
+	add_offset: 0			- offset (ENVI hdr)
