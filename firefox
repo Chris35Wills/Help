@@ -1,21 +1,28 @@
-Firefox
-=======
+# Firefox won't work!!
 
-If firefox won;t run, it ay be running in a different session - you can kill it via:
+Perhaps you are getting an error like:
 
+If firefox won't run, it may be running in a different session - the problem is that it can;t share a profile - you can kill it via:
+
+```
 pgrep firefox # gets PID
 kill [firefox_PID]
--- or --
+## or ##
 ps aux | pgrep firefox
 kill [firefox_PID]
+```
 
 If that doesn't work, there may be a stuck lockfile - have a look at your profile directory:
 
+```
 ~/.mozilla/firefox
-	- contains your profile and potentially any lock files that may exist preventing firefox from being run
-	- do not delete your profile!!!
+```
+This contains your profile and potentially any lock files that may exist preventing firefox from being run.
+Youi can delete the lock files but do not delete your profile!!! If you do, then you'll have to build a new one (see below)
 
-If that doesn't work, try and build a new profile:
+If none of the above works, try and build a new profile - this can be done on the command line by simply calling:
 
+```
 firefox -profilemanager
+```
 
