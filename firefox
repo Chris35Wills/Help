@@ -1,0 +1,21 @@
+Firefox
+=======
+
+If firefox won;t run, it ay be running in a different session - you can kill it via:
+
+pgrep firefox # gets PID
+kill [firefox_PID]
+-- or --
+ps aux | pgrep firefox
+kill [firefox_PID]
+
+If that doesn't work, there may be a stuck lockfile - have a look at your profile directory:
+
+~/.mozilla/firefox
+	- contains your profile and potentially any lock files that may exist preventing firefox from being run
+	- do not delete your profile!!!
+
+If that doesn't work, try and build a new profile:
+
+firefox -profilemanager
+
