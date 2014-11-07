@@ -1,0 +1,8 @@
+R - helpful commands
+####################
+
+# Add a new column (called newcol) of value "1"
+densdf$newcol<-rep(1, nrow(densdf))
+
+#Get maximum of column and associated value from another column
+max_vals <- data.frame(tapply(densdf[,1], densdf[,2], max))
