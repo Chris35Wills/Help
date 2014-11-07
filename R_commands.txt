@@ -1,6 +1,10 @@
 R - helpful commands
 ####################
 
+# Install R package at source
+
+http://stackoverflow.com/questions/1474081/how-do-i-install-an-r-package-from-source
+
 # Add a new column (called newcol) of value "1"
 densdf$newcol<-rep(1, nrow(densdf))
 

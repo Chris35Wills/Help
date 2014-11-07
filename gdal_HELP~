@@ -1,7 +1,0 @@
-Useful gdal_tools
-=================
-
-gdalinfo		Report info. for a given file
-gdal_translate		Copy raster and control it's output settings (data type etc.)
-gdaltransform		Alter coordinate systemes for a given raster
-gdalwarp		Warp a given image to a new coordinate system
