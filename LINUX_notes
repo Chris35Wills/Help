@@ -146,9 +146,16 @@ man -k grd					Finds any programme with "grd" in the title (useful for finding n
 
 ------------------------------------------------------
 
-Search for file:
+Search for file (name):
 
 find . -name \*png			Find files | in this directory (the ".") | with anything preceding "png" (wildcard * can be used but must be escaped with "\") 
 find -name "query"			Find files in your current directroy of "name" - case sensitive
 find -iname "query"			Find files in your current directroy of "name" - not case sensitive
+
+Search for file (containing string):
+
+grep -rnw 'directory' -e "pattern"	
+e.g. grep -rnw ./ -e "about"		Find files in current dir containing string 'about' 
+(see http://stackoverflow.com/questions/16956810/finding-all-files-containing-a-text-string-on-linux)
+
 ## http://www.howtogeek.com/112674/how-to-find-files-and-folders-in-linux-using-the-command-line/

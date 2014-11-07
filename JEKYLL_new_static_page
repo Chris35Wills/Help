@@ -1,0 +1,36 @@
+How to add new static pages in jekyll:
+
+1. Make a new page in your website route directory - the same way as about.md exists (header and markdown)
+
+e.g. 
+
+---
+layout: page
+title: Something something....
+permalink: /something/
+---
+
+something_else....
+
+2. Go to the ./_layout/deafult.html and find this section:
+          
+          <nav>
+            <a href="{{ site.baseurl }}/">Blog</a>
+            <a href="{{ site.baseurl }}/about">About</a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+3. Amend the section to the following:
+          
+          <nav>
+            <a href="{{ site.baseurl }}/">Blog</a>
+            <a href="{{ site.baseurl }}/about">About</a>
+            <a href="{{ site.baseurl }}/something">Something else</a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+4. Add, commit and push and you're sorted!
