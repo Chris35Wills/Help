@@ -43,6 +43,22 @@ Where this occurs:
 3. Now try and push again...
 4. If still not working, search "fix github merge conflict"
 
+-----------------------------
+Access old versions of things
+-----------------------------
+A key benefit of using git is version control so it helps to know how to get old version of things...
+
+1. git log # or # git log --oneline
+2. git checkout 32700d0 (i.e. the code of the  version of the repo that you want - see how useful helpful commit messages can be!!)
+
+### Now you can copy things out of a file from this version of the repo etc..
+### Don't add or commit at this stage as bad things will happen that will likely ### cause more vonfusion than necessary unless you're a decent hack (whereby you ### likely won't be reading anything on this site)
+
+3. When you're done: git checkout head # now you're back where you were before younchecked anything out
+
+
+
+
 =============
 Quick summary
 =============
