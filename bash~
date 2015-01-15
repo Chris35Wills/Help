@@ -2,8 +2,6 @@
 Bash help
 ~~~~~~~~~
 
-SEE: http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO-7.html
-
 Basic loop:
 
 #Print numbers 1-10:

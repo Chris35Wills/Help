@@ -159,9 +159,3 @@ e.g. grep -rnw ./ -e "about"		Find files in current dir containing string 'about
 (see http://stackoverflow.com/questions/16956810/finding-all-files-containing-a-text-string-on-linux)
 
 ## http://www.howtogeek.com/112674/how-to-find-files-and-folders-in-linux-using-the-command-line/
-
-
-------------------------------------------------------
-Create a .zip:
-
-zip -r zipfile.zip directory e.g. zip -r ./stuff.zip . #(create stuff.zip in this directory of the stuff in this directory)
