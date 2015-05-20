@@ -7,7 +7,7 @@ permalink: /githubbits/
 All things Github related - there's plenty of help available from Git. I just noted down the bits I find myself continually revisiting. 
 A good place to visit for a proper "how to course" in terminal casn be found [here](http://learnpythonthehardway.org/book/appendixa.html)
 
-##First time depository set-up
+##First time repository set-up
 
 	1. Change your directory to that which you would like to have as a repository
 	2. to set as repository > `git init` ## this creates a hidden file that allows github to track the repository you've just initialised
