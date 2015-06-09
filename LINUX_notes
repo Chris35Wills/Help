@@ -58,6 +58,7 @@ NB/ If you have a directory problem e.g. " /tmp/temp_coords: Permission denied. 
 access it because you don;t have the permission!) 
 ****************************
 
+ls -d */ 			List all subdirectories in a directory
 ls -lh						List files in a directory + directories + size
 							(in a readable format)
 ls -la						List files in a directory + hidden files
