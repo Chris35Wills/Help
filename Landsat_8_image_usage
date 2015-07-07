@@ -1,0 +1,13 @@
+## Landsat 8 image usage
+========================
+
+(1) Download your images - I like to use [http://earthexplorer.usgs.gov/](http://earthexplorer.usgs.gov/) - see [here](http://earthobservatory.nasa.gov/blogs/elegantfigures/2013/05/31/a-quick-guide-to-earth-explorer-for-landsat-8/) (http://earthobservatory.nasa.gov/blogs/elegantfigures/2013/05/31/a-quick-guide-to-earth-explorer-for-landsat-8/)
+	- the image to download is the geotiff zip
+
+(2) You then want to get a "true colour" image version - follow the steps [here](http://earthobservatory.nasa.gov/blogs/elegantfigures/2013/10/22/how-to-make-a-true-color-landsat-8-image/?src=share) - http://earthobservatory.nasa.gov/blogs/elegantfigures/2013/10/22/how-to-make-a-true-color-landsat-8-image/?src=share
+
+(3) You can then export your image as a geotiff or whatever you want
+
+## More info
+
+[Landsat 8 bands explained](http://landsat.usgs.gov/best_spectral_bands_to_use.php)
