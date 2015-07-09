@@ -1,6 +1,10 @@
 # Plotting in IDL
 =================
 
+Make sure you have the [Coyote](http://www.idlcoyote.com/documents/programs.php#COYOTE_LIBRARY_DOWNLOAD) and [Catalyst](http://www.idlcoyote.com/documents/programs.php#CATALYST_LIBRARY_DOWNLOAD) libraries installed.
+
+I'm also using some custom built libraries courtesy of Ruud Hurkmans.
+
 ## 3d array
 
 		> isurface, array 
