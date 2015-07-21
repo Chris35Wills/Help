@@ -1,13 +1,55 @@
 ## Landsat 8 image usage
 ========================
 
-(1) Download your images - I like to use [http://earthexplorer.usgs.gov/](http://earthexplorer.usgs.gov/) - see [here](http://earthobservatory.nasa.gov/blogs/elegantfigures/2013/05/31/a-quick-guide-to-earth-explorer-for-landsat-8/) (http://earthobservatory.nasa.gov/blogs/elegantfigures/2013/05/31/a-quick-guide-to-earth-explorer-for-landsat-8/)
-	- the image to download is the geotiff zip
+#Step 1: Download
+Download your images - I like to use [http://earthexplorer.usgs.gov/](http://earthexplorer.usgs.gov/) - see [here](http://earthobservatory.nasa.gov/blogs/elegantfigures/2013/05/31/a-quick-guide-to-earth-explorer-for-landsat-8/) 
+	- the image to download is the geotiff zip (you'll need to sign in to get this)
+	- unpack the resultant tar file (in cygwin, use something like: "tar xvf LC80080032015196LGN00.tar.gz -C landsat8_79n")
 
-(2) You then want to get a "true colour" image version - follow the steps [here](http://earthobservatory.nasa.gov/blogs/elegantfigures/2013/10/22/how-to-make-a-true-color-landsat-8-image/?src=share) - http://earthobservatory.nasa.gov/blogs/elegantfigures/2013/10/22/how-to-make-a-true-color-landsat-8-image/?src=share
+#Step 2: Composite
+You now want to get a "true colour" image version - follow the steps [here](http://earthobservatory.nasa.gov/blogs/elegantfigures/2013/10/22/how-to-make-a-true-color-landsat-8-image/?src=share)
 
-(3) You can then export your image as a geotiff or whatever you want
+To do this in QGIS:
+	[1] Raster menu item
+	[2] Miscellaneous tab
+	[3] Merge... this opens a window
+		[a] select bands 2,3 and 4 from the unpacked tar folder
+		[b] check the "Layer Stack" box
+		[c] select the output location
+		[d] Save and you're DONE!
+
+To do this in GDAL:
+	
+	gdal_merge -v -separate -of GTiff -co PHOTOMETRIC=RGB -o gdal_merge_79n_432.tif LC80080032015196LGN00_B4.TIF LC80080032015196LGN00_B3.TIF LC80080032015196LGN00_B2.TIF
+
+#Step 3: Use in IDL (...)
+
+Perhaps a modification of [this function](https://code.google.com/p/datatools/source/browse/trunk/IDL/Landsat/Landsat_Create_R5G4B3.pro?r=58) is helpful...
+
+See ~\GitHub\Bristol_data\Bristol_data\Landsat_image_processing\open_landsat.pro for basic reading n, stacking and displaying of an rgb scene
+
+Look at ~Github/Bristol_data/Bristol_data/Morlighem_bed_data/plot_morlighem_difference_regions_with_LANDSAT8.pro
+	- there is a lot more in this script than required really... so pick what you need!
+	- this takes in Landsat rgb bands warped using gdal (for prj change) and stacks them in IDL
+	- also uses:
+			~\GitHub\Bristol_data\Bristol_data\Landsat_image_processing\warp_landsat_rgb.sh
+			~\GitHub\Bristol_data\Bristol_data\Landsat_image_processing\get_gdalinfo_parameter_details.py
+
+## Composite in gdal
+
+Read more about the approach [here](https://www.mapbox.com/guides/processing-satellite-imagery/)
+
+	>gdal_merge -v -separate -of GTiff -co PHOTOMETRIC=RGB -o gdal_merge_79n_432.tif LC80080032015196LGN00_B4.TIF LC80080032015196LGN00_B3.TIF LC80080032015196LGN00_B2.TIF
+
+Creates a three band raster
+
+## Do this in python...
+
+Have a look at [this](http://nbviewer.ipython.org/github/HyperionAnalytics/PyDataNYC2014/blob/master/color_image_processing.ipynb)
 
 ## More info
 
 [Landsat 8 bands explained](http://landsat.usgs.gov/best_spectral_bands_to_use.php)
+[True colour landsat 8](http://earthobservatory.nasa.gov/blogs/elegantfigures/2013/10/22/how-to-make-a-true-color-landsat-8-image/)
+[The many bands of Landsat 8 and potential usage](http://www.exelisvis.com/Home/NewsUpdates/TabId/170/ArtMID/735/ArticleID/14305/The-Many-Band-Combinations-of-Landsat-8.aspx)
+
