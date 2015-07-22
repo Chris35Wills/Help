@@ -8,6 +8,10 @@ This is a measure of the degree to which a set of spatial features and their ass
 
 Spatial autocorrelation can be detected using "Morans I" or a Mantel Test - these can be implemented as descibed [here](http://www.ats.ucla.edu/stat/mult_pkg/faq/general/spatial_autocorr.htm). 
 
+## Stationarity
+
+There are two key types to consider. **Mean stationarity** is where a *mean is assumed constant between samples*, indpendent of location. **Second-order stationarity** is the assumption that the *covariance between two points* is the same for a given distance and direction, regardless of which two points are chosen. For semivariograms, **intrinsic stationarity** is the assumption that the *variance of the difference* is the same between any two points that are at the same distance and direction apart no matter which two points you choose (taken from [here](http://resources.arcgis.com/en/help/main/10.1/index.html#//003100000033000000)).
+
 ## Kriging in R
 
 
