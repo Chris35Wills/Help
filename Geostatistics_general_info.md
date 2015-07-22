@@ -1,5 +1,4 @@
 # Geostatistics general info
-============================
 
 Some notes on bits and pieces worth remembering, reconsidering and reviewing whenever delving into geostats.
 
@@ -9,11 +8,10 @@ This is a measure of the degree to which a set of spatial features and their ass
 
 Spatial autocorrelation can be detected using "Morans I" or a Mantel Test - these can be implemented as descibed [here](http://www.ats.ucla.edu/stat/mult_pkg/faq/general/spatial_autocorr.htm). 
 
-http://userwww.sfsu.edu/efc/classes/biol710/spatial/spat-auto.htm
-
 ## Useful resources
 
-http://onlinelibrary.wiley.com/doi/10.1111/j.1365-2699.2011.02637.x/pdf
+[Spatial autocorrelation](http://userwww.sfsu.edu/efc/classes/biol710/spatial/spat-auto.htm)
+[8.5 deadly sins of spatial analysis](http://onlinelibrary.wiley.com/doi/10.1111/j.1365-2699.2011.02637.x/pdf)
 
 
 
