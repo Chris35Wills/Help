@@ -1,4 +1,4 @@
-# Download a website and all of its associated comnponents for full access offline
+# Download a website and all of its associated components for full access offline
 ==================================================================================
 
 You need cygwin installed with the "wget" package - packages are installed with the installer (if ever you need another package, you must rerun the installer and ensure the package you want (search it in the window that comes up) is selected to be installed i.e. not "skipped") - [see here](https://cygwin.com/install.html).
