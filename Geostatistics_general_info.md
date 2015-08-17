@@ -6,6 +6,18 @@ Full sets of notes and examples in R are available [here](http://www.css.cornell
 
 ## Some definitions
 
+### Variance
+
+The average of the squared differences from the Mean
+
+### Covariance
+
+The mean value of the product of the deviations of two variates from their respective means
+
+### Standard deviation
+
+The square root of variance
+
 ### Spatial autocorrelation
 
 This is a measure of the degree to which a set of spatial features and their associated values cluster together in space (positive spatial autocorrelation) or disperse (negative spatial autocorrelation). It is important to know whether data are autocorrelated (and to the degree to which they are) when applying certain statistical tests as the presence of autocorrelation can violate certain assumptions - most statistical approaches assume that measured outcomes are indpendent of one another (they are based on the assumption that samples are randomly sampled from a population - therefore if samples are biased, stats calculated will not accurately characterize the data).
@@ -20,7 +32,7 @@ A nice [summary](https://desktop.arcgis.com/en/desktop/latest/guide-books/extens
 
 "In a spatial setting, the idea of stationarity is used to obtain the necessary replication. Stationarity is an assumption that is often reasonable for spatial data. There are two types of stationarity. One is mean stationarity, where it's assumed that the mean is constant between samples and is independent of location.
 
-The second type of stationarity is second-order stationarity for covariance and intrinsic stationarity for semivariograms. Second-order stationarity is the assumption that the covariance is the same between any two points that are at the same distance and direction apart no matter which two points you choose. The covariance is dependent on the distance between any two values and not on their locations. For semivariograms, intrinsic stationarity is the assumption that the variance of the difference is the same between any two points that are at the same distance and direction apart no matter which two points you choose.
+The second type of stationarity is **second-order stationarity** for *covariance* and **intrinsic stationarity** for *semivariograms*. Second-order stationarity is the assumption that the covariance is the same between any two points that are at the same distance and direction apart no matter which two points you choose [for a given region]. The covariance is dependent on the distance between any two values and not on their locations. For semivariograms, intrinsic stationarity is the assumption that the variance of the difference is the same between any two points that are at the same distance and direction apart no matter which two points you choose [for a given region].
 
 Second-order and intrinsic stationarity are assumptions necessary to get the replication to estimate the dependence rules, which allows you to make predictions and assess uncertainty in the predictions. Notice that it is the spatial information (similar distance between any two points) that provides the replication."
 
