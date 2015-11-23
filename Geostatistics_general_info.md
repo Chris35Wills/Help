@@ -14,6 +14,8 @@ The average of the squared differences from the Mean
 
 The mean value of the product of the deviations of two variates from their respective means
 
+Covariance and assocaiated covariograms are discussed and explained [here](http://www.math.umt.edu/graham/stat544/variog.pdf).
+
 ### Standard deviation
 
 The square root of variance
@@ -84,6 +86,7 @@ If the empirical semivariogram continues climbing steadily beyond the global var
 
 [Here](http://www.geo.mtu.edu/rs4hazards/ksdurst/website/Thesis/Kriging.html) is a nice walk through for data interpolation in Arc.
 
+{% comment %} 
 # Ordinary kriging
 	
 # Simple kriging
@@ -91,6 +94,7 @@ If the empirical semivariogram continues climbing steadily beyond the global var
 # Universal kriging
 
 ## Kriging in R
+{% endcomment %}
 
 ## Useful resources
 
