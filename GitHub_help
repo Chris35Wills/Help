@@ -57,7 +57,42 @@ A key benefit of using git is version control so it helps to know how to get old
 3. When you're done: git checkout head # now you're back where you were before younchecked anything out
 
 
+---------------------------------------
+Check which files you are about to push
+---------------------------------------
 
+	git diff --stat --cached [remote/branch]
+
+For example (http://stackoverflow.com/questions/3636914/how-can-i-see-what-i-am-about-to-push-with-git):
+
+	git diff --stat --cached origin/master
+
+---------------------------
+See history of past commits
+---------------------------
+
+	git log
+
+---------------------------
+See log of unpushed commits
+---------------------------
+
+From here: http://stackoverflow.com/questions/2016901/viewing-unpushed-git-commits
+
+	git log --stat origin/master..HEAD
+
+----------------------------------------
+Reset the directory to a previous commit 
+----------------------------------------
+
+This is useful if you have made a commit that you haven't yet/can't push
+(See: http://stackoverflow.com/questions/1611215/remove-a-git-commit-which-has-not-pushed)
+
+1. git log <- gets a list of past commits
+2. git reset --hard commit_id
+	e.g. git reset --hard eb27bf26dd18c5a34e0e82b929e0d74cfcaab316
+
+IMPORTANT: Make sure you have a backup of your git repo in case you end up throwing away any uncommitted changes - this is somewhat annoying when you realise you've deleted work.
 
 =============
 Quick summary
@@ -69,6 +104,7 @@ git push - copies local to remote
 git status - tells you what is going on
 
 git remote rm origin - remove origin (if you want to create a new one)
+git diff --stat --cached origin/master # check what is about to be pushed from origin to remote (see here: http://stackoverflow.com/questions/3636914/how-can-i-see-what-i-am-about-to-push-with-git)
 
 Glossary
 ========
