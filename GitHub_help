@@ -81,6 +81,12 @@ From here: http://stackoverflow.com/questions/2016901/viewing-unpushed-git-commi
 
 	git log --stat origin/master..HEAD
 
+-----------------------------------
+Undoing, fixing or removing commits
+-----------------------------------
+
+Read more here: http://sethrobertson.github.io/GitFixUm/fixup.html#committed
+
 ----------------------------------------
 Reset the directory to a previous commit 
 ----------------------------------------
