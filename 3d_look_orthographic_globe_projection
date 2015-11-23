@@ -1,0 +1,84 @@
+# Create orthographic projection of the globe according to AOI
+# Essentially makes a cool looking 3D map of the glob which is nice for presentations
+# @Chris 07/10/15
+
+#Method
+1. Get vector file
+2. Vector file as WGS84
+
+** INSERT IMAGE**
+** 01_world_borders_in_qgis.png **
+
+3. Modify values of each polygon (used for raster conversion) - I'm interested in Greenland and Sweden so set values of these polygons to 2, every other land polygon to 1
+
+i.e. 
+
+- Open attribute table and go into edit mode (click the yellow pencil)
+- Create a new column (I called mine AOI)
+- For the new column using the field calcualtor add values - this is required for the vector -> raster transformation.We'll need to use a conditional statement here and we want all land polygons in world_borders.shp to have a value of 1 unless they are Sweden or Greenland, in which case they should have a value of 2.
+
+	CASE 
+    WHEN "CNTRY_NAME" = 'Sweden' THEN 2
+    WHEN "CNTRY_NAME" = 'Greenland' THEN 2
+    ELSE 1
+	END
+
+NB/ "CNTRY_NAME" is one of the existing columns in world_borders.shp
+
+** INSERT IMAGE ATTRIBUTE TABLE AND NEW COLUMN** ** 02_attrib_add_col.png **
+** INSERT IMAGE ATTRIBUTE TABLE AND FIELD CALCULATOR** ** 03_field_calc.png **
+
+- Save your edits and exit edit mode (reclick the yellow pencil icon)
+
+** ATTRIBUTE TABLE COLUMN WITH 1s AND 2s** ** 04_AOI_values_created.png **
+
+4. Convert polygon to raster. You'll want to be using the AOI column for the values and consider the resolution of the vector as you need to set the resolution of the output raster - values of 3600 and 1700 are enough for this example.
+
+** INSERT IMAGE RASTER CONVERSION** ** 05_rasterize.png **
+
+5. Convert (warp) raster to self defined ortho projection - I want greenland to be on the "horizon" to the top left of the globe so used the following by centreing around the eastern mediterranean:
+	+proj=ortho +lat_0=35.5 +lon_0=30 +x_0=0 +y_0=0 +a=6371000 +b=6371000 +units=m +no_defs
+
+** INSERT IMAGE OF WARP DIALOGUE BOX** ** 06_warp.png **
+
+6. Change your map CRS status (bottom right) and "Enable 'on the fly' CRS transformation" to your previously defined ortho projection (step 5) (you may need to define this projection system before doing the CRS transformation - to define a projection go to >Settings >Custom CRS > Add new CRS > fill in the parameter box with proj4 syntax - in our case remember we are using the system defined in step 5 - I named mine "ortho_crMed"
+
+** INSERT IMAGE ** 07_CRStransform.png
+
+7. Right click the warped raster in the table of contents and zoom to it - ypou should have something like this:
+
+** INSERT IMAGE ** 08_3Dglobe.png
+
+8. Sort out the colour scheme using the raster call values
+
+** INSERT IMAGE ** 09_3Dglobe_recoloured.png
+
+9. Screen shot and edit (perhaps using GIMP)
+
+** INSERT IMAGE OF FINAL PRODUCT** ** 10_arctic_horizon.png **
+
+WARNING: If using for presentations, ensure that the colours you use aren't too light as they might not show up (speaking from experience) - this is particularly a problem if you are trying to highlight one region with a darker colour relative to other regions in lighter hues. This might be obvious but some projectoirs will give different results so better to be on the safe side.
+
+10. EXTRA Adding lon/lat axis is possible by creating a grid whilst in the WGS84 projection (>Vector >Research Tools> Vector grid) and then densifying the line (>Vector >Geometry >Densify geometries) - this can then be warped in the same way as world_borders.shp (this is taken from [here](http://polemic.nz/2014/11/21/nz-azimuth-orthographic/))
+
+#Useful and interesting links:
+
+World borders vector: 
+	http://www.mappinghacks.com/data/
+Inspiration: 
+	http://polemic.nz/2014/11/21/nz-azimuth-orthographic/  ## check it out for a full vector approach
+	http://www.wired.com/2014/11/get-to-know-a-projection-azimuthal-orthographic/
+	http://thematicmapping.org/downloads/world_borders.php
+
+
+#Useful links/things I used to help me along:
+http://polemic.nz/2014/11/21/nz-azimuth-orthographic/
+http://gis.stackexchange.com/questions/70207/where-did-the-polygons-go-after-projecting-a-map-in-qgis
+
+#Files:
+O:\Desktop\world_borders\world_borders.shp						<< vector data (from: http://www.mappinghacks.com/data/)
+O:/Desktop/world_borders/world_borders_wgs84.tif       			<< raster from vector (make sure you have a useful attribute - i.e. add a column 
+														  		   to the vector to number all land polygons or something otherwise you can't 	
+														   		   differentiate from the ocean)
+O:/Desktop/world_borders/world_borders_orthoMED.tif				<< raster warped to ortho projection (tagged for greenland and sweden)
+O:/Desktop/world_borders/world_borders_grnlnd_orthoMED.tif		<< raster warped to ortho projection (tagged for greenland)
