@@ -1,10 +1,10 @@
-###############
-## Python day 1
+################################
+## Python
+## Simple loops and plotting
 ## Andrew Walker
 
 All data: C:\\Users\\ggwillc\\Desktop\\2016-01-06-bristol-python'
 All data: https://github.com/andreww/2016-01-06-bristol-python
-
 
 ##################
 If people have python 2 installed:
