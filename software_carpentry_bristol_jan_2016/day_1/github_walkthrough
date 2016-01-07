@@ -1,0 +1,44 @@
+###############
+# Github lesson
+# 
+# Grace Cox
+###############
+
+git init # initialise repo
+
+|------------------------------------------------------------------|
+| LOCAL --> git add --> STAGING AREA --> git commit --> REPOSITORY |
+|------------------------------------------------------------------|
+
+If you've added but not yet commited, you can see the difference between the STAGING AREA and REPO versions using git diff. Good to see what you've changed is you've forgotten what you've altered!
+
+	> git diff 				# gives output if you haven;t yet added it
+	> git diff --staged     # gives output if you have added it to the staging area
+
+	...once commited, "git diff --staged" won;t retuyrn anything as the STAGING AREA and REPO versions are now the same.
+
+	git log # record of commits
+
+	"head" is shorthand for the last commit
+	git diff HEAD HEAD~1 # difference between most recent commit and the one before it
+
+	git checkout HEAD~1 pluto.txt # checks out the most recent commit and takes it back to the one before
+	git checkout HEAD # fully resets to last commit (so get's rid of new edits not yet commited)
+
+Create .gitignore in rep to show what shouldn't be added (if using git add -a for example). The .gitignore must exist within the root directory. The file ".gitignore" would just contain file names or directories:
+e.g. 
+
+*.txt
+results/
+
+Using "git status --ignored" states what wasn't added (as a functyion of an existing .gitignore)
+
+####################################
+Look also at:
+
+git interactive rebase
+git rebase
+
+	
+
+
