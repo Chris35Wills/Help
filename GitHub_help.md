@@ -34,15 +34,19 @@ Pull files from remote to local
 -------------------------------
 
 1. just type > git pull # assumes your already in the repository
-# this will update the local from the remote but won't overwrite any changes you've made in the local that haven't been pushed to theremote (!)
-# this will only update files linked with github i.e. if you have other stuff in thelcoal folder no in github, this won't be overwritten (so you won't lose stuff)
+
+this will update the local from the remote but won't overwrite any changes you've made in the local that haven't been pushed to theremote (!)
+
+this will only update files linked with github i.e. if you have other stuff in thelcoal folder no in github, this won't be overwritten (so you won't lose stuff)
 
 -------------------
 Fix merge conflicts
 -------------------
 
 Occurs where a file in a repo is changesd but differs from the version in the repo (that was never pulled in before changes were made)
+
 Where this occurs:
+
 1. git mergetool
 2. COnflict regions are highlighted in document in an editor that will pop up - make alterations (i.e. address conflict) and then save
 3. Now try and push again...
@@ -56,10 +60,10 @@ A key benefit of using git is version control so it helps to know how to get old
 1. git log # or # git log --oneline
 2. git checkout 32700d0 (i.e. the code of the  version of the repo that you want - see how useful helpful commit messages can be!!)
 
-### Now you can copy things out of a file from this version of the repo etc..
-### Don't add or commit at this stage as bad things will happen that will likely ### cause more vonfusion than necessary unless you're a decent hack (whereby you ### likely won't be reading anything on this site)
+Now you can copy things out of a file from this version of the repo etc..
+Don't add or commit at this stage as bad things will happen that will likely - cause more vonfusion than necessary unless you're a decent hack (whereby you likely won't be reading anything on this site)
 
-3. When you're done: git checkout head # now you're back where you were before younchecked anything out
+3. When you're done: git checkout head - now you're back where you were before younchecked anything out
 
 -------------------------------------------------------------
 Check file changes before you add a file to the staging area
