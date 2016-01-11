@@ -54,6 +54,18 @@ colaborator can now change, add, commit and push things
 as changes are made, others need to update their repos:
 	need to use "git pull" to get your repo up to date
 
+Enable "Commit access" for trusted members - you can;t vet commits!
+If you don;t know who is adding and want to vet things, then a different approach is required. 
+
+To vet each commit, a collaborator must clone your repo using web browser, they change their version, make pull request - this then asks you to accept or refute merges - you can annotate their changes too.
+
+order:
+
+1. clone (or git fork) ('collaborator')
+2. branch ('collaborator')
+3. make pull request ('collaborator')
+4. person in charge of original accepts or refutes ('owner')
+
 #.. conflicts
 two collaborators change same file
 one will push and succeed
@@ -153,14 +165,4 @@ Create a new branch called moons:
 	fast forward merge vs. recursive merge
 
 
-Enable "Commit access" for trusted members - you can;t vet commits!
-If you don;t know who is adding and want to vet things, then a different approach is required. 
 
-To vet each commit, a collaborator must clone your repo using web browser, they change their version, make pull request - this then asks you to accept or refute merges - you can annotate their changes too.
-
-order:
-
-1. clone (or git fork) ('collaborator')
-2. branch ('collaborator')
-3. make pull request ('collaborator')
-4. person in charge of original accepts or refutes ('owner')
