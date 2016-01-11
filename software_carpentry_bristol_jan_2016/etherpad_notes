@@ -1,0 +1,405 @@
+
+Welcome to Software Carpentry Etherpad!
+
+This pad is synchronized as you type, so that everyone viewing this page sees the same text. This allows you to collaborate seamlessly on documents.
+
+Use of this service is restricted to members of the Software Carpentry and Data Carpentry community; this is not for general purpose use (for that, try etherpad.wikimedia.org).
+
+Users are expected to follow our code of conduct: http://software-carpentry.org/conduct.html
+
+All content is publicly available under the Creative Commons Attribution License: https://creativecommons.org/licenses/by/4.0/
+
+Welcome to the etherpad for the Bristol workshop starting on 6th Jan 2016
+
+We will use this pad to share links and other information. Please also feel free to use this pad to create shared notes during the workshop. You can ask questions in the chat window on the right.
+
+The workshop website can be found at: http://andreww.github.io/2016-01-06-bristol/
+
+Please introduce yourself below (Name / Institution / (other contact info): 
+Andrew Walker / University of Leeds / (@andreww on Github, @a_walker on twitter)
+Grace Cox (University of Leeds/University of Liverpool) gracecox on Github
+Hello, Arminel Lovell, Newcastle University
+Purvis posse !
+ |
+ |
+V
+Hello! Rogier Hintzen --> Imperial College/Natural History Museum
+Hey. Victoria Burton Imperial College/ Natural History Museum @soilscholar
+Hiya - Adriana De Palma here from the Natural History Museum @adpalma (Twitter)
+Hello :) Ronan McAdam / Imperial College London
+Happy new year everyone :) - James Hickey / Univeristy of Bristol / @jameshickey77 (Twitter)
+Hello: Laurence Billingham  / BGS /  laurence@bgs.ac.uk
+Hi there, Max Werner UoB
+Hello! Erik Mackie / University of Bristol / @erikmackie (GitHub) @ErikMackie (Twitter)
+Hello: Chris Williams / Uni Bristol / chris.williams@bristol.ac.uk / @chris35williams (twitter) / Chris35Wills (Github) / chris35wills.github.io (<<< check it out!)
+Hello all! Michael Cooper / University of Bristol / m.a.cooper@bristol.ac.uk / @macGrIS Github / @macooperr Twitter
+Hello. Matt Rowlinson, University of Leeds
+Hi! - Marieanne Leong (Mae for short) / University of Leeds / eemcl@leeds.ac.uk
+Hi. Beth Woodhams/University of Leeds/eebjw@leeds.ac.uk
+Hello, Will Brown / British Geological Survey / wb@bgs.ac.uk
+Howdy, Daniel Padfield/ University of Exeter/ @padpadpadpad (twitter) / @padpadpadpad (Github)
+Hello - James Duffy / University of Exeter / @everydayduffy on Github
+Kathryn Fowler / University of Manchester / Kathryn.Fowler@manchester.ac.uk / @KathrynFowler91 on Github / @KathrynFowler91 on Twitter
+Hello - Sarah Holmes / University of Exeter
+Alan Baird / University of Bristol / alanfbaird on Github
+Hello!  James Holt / University of Liverpool / j.holt@liverpool.ac.uk
+Hello! Jenny Jardine / University of Liverpool / j.jardine@liverpool.ac.uk 
+Neil Wilkins / University of Bristol / NeilWilkins on github
+Hi there! Marta Pienkowska / University of Oxford / @martapien on github
+Hi Sam Doyle / Aberystwyth Uni
+Antony Butcher / University of Bristol
+Hello! Dave Ashmore, Aberystwyth Uni / dwa@aber.ac.uk 
+
+
+If anyone is having trouble copying/pasting from/to Git Bash in Windows this shows you how to enable it - https://danlimerick.wordpress.com/2011/07/23/git-for-windows-tip-how-to-copy-and-paste-into-bash/
+
+Python 2.x and Python 3.x
+If you have updated to python 3 for this course, but still want to use python 2 in conjuction after course
+you can call both versions in commandline
+python -- calls python 3.x
+python2 -- calls python 2.x
+
+ipython -- calls python 3.x
+ipython2 -- calls python 2.x
+
+
+Ideas for day 3
+
+Band/ pattern (egde?) detection -- linear 'feature' detection of ? Example: https://en.wikipedia.org/wiki/Edge_detection#/media/File:EdgeDetectionMathematica.png - concepts could be applied RS images , and with shell growth bands (<-cool, tree rings?)? Yeah, exactly the same as dendrochronology but using marine molluscs instead
+maybe look at scikit-image [http://scikit-image.org/]
+1D time-series example? 
+Photos and maps (2D version)
+1D and 2D versions at least can use a very simple convolution of the derivative of a Gaussian function with the data to highlight the maximum gradient changes -  function available form scipy.stats
+
+Non-trivial problem: gradient is still smooth - you can have a manually varied threshold and pick gradient maxima above this -  nice, still an arbitrary threshold though
+
+REPO started:
+https://github.com/lbillingham/edge_detection_sw_carp
+http://pad.software-carpentry.org/bristol_jan_16_edge_detection
+
+Group 3 (edge detection)
+Ronan
+Beth Woodhams
+Will
+Marta 
+Sarah
+Laurence
+
+Dave A (4)
+Arminel (4)
+Kathryn (2)
+
+
+
+
+Twitter geolocation through time -- access location of tweets and map through time (https://code.google.com/p/python-twitter/) . - animated heatmaps with heatmap.py?-this does sound cool -
+https://github.com/bear/python-twitter
+bunch of resources for accessing Twitter using Python - https://dev.twitter.com/overview/api/twitter-libraries
+- Similar study done comparing flu outbreak and spread of #flu (sorry, can't find reference..)
+- 3D animation of surface evolution - tools available in matplotlib 
+- http://mashable.com/2009/06/30/gorgeous-twitter-visualizations/#vSboAlmalgqC << INSPIRATION
+ - they've done this for project splatter (twitter initiative tracking roadkill for biodiversity monitoring purposes) magpie mapper also a similar project.
+ - something like the RSB ant tracker but with craneflies, worms or other biodiversity? Tracking phenology? Flooding?
+
+
+Group 1: (Twitter a) - https://etherpad.net/p/orangutan
+James Hickey - githib: jh6666 - twitter: @jameshickey77
+Adriana De Palma (adrianadepalma)
+Erik Mackie (GitHub: erikmackie) 
+Daniel Padfield  (github - padpadpadpad)
+James Duffy everydayduffy on Github
+Rogier
+
+Find our code on Github here: https://github.com/REH12/MapTweet
+
+Group 2: (Twitter b)
+Chris Williams
+Michael Cooper
+Jenny Jardine
+James Holt
+Victoria Burton
+Kathryn
+
+Matt Rowlinson (4)
+
+Image segmentation - photos or RS images
+- on this theme (if reading images as numpy arrays), subset array by data point density (in the case of numpy array with NaNs). Through organic grid growth?? i.e. to plot areas of large array that have a certain datapoint density (branch of machine learning cluster analysi/support vector machines [http://scikit-learn.org/]) 
+you need a convolution function I reckon - consider nearest neighbour algorithms
+
+
+Set of spherical harmonic coefficients to global map
+coeffs to forward model
+different reolutions
+inverse model to see if we can recover coeff from synthesised data
+
+Will
+Laurence
+
+
+
+Simple structure-from-motion implementation <<<< maybe leave this for now (future github collaboration?)
+
+Creating gridded field from sparse lat/lon data (e.g. satellite tracks) -- use GDAL grid? -- interpolation... check out r bindings if you want more geostat power GMT also has tools for this (http://gmt.soest.hawaii.edu/) Thanks for the tips!
+
+
+Automate the download of a sequence of gridded maps of temperature variable (e.g. mean temperature) at monthly resolution then string together n years' worth of images as an animation.- using ERA-Interim?
+
+Group 4 (temperature)
+Sam Doyle
+Marieanne
+Armine
+Dave Al
+Matt
+
+Adriana De Palma (1)
+)
+James Holt (2)
+Jenny Jardine (2)
+Victoria (2)
+
+Detect and store corner frequencies of Fourier amplitude spectrum from a large seismic dataset-maybe download data direct from web too
+
+James Holt (2)
+Ronan (3)
+Beth (3)
+Marta (3)
+
+
+Bash lesson
+
+cd 
+cd Desktop
+git clone https://github.com/gracecox/2016-01-06-bristol-bash.git
+cd 2016-01-06-bristol-bash
+
+List of commands:
+    wc (shows the number of lines, words and characters in each file)
+    ls (list files)
+    cat (displays contents of file in standard command line output)
+    sort -n (displays sorted contents of file in ascending alphabetical/numerical order)
+    head -n (displays first n lines of a file)
+    tail -n (displays last n lines of a file)
+    *     e.g. *.pdb (star - applies to all .pdb files)
+
+for loop, eg.:
+for file in file1 file2 file3...
+do
+<your commands here>
+done
+
+Excercises markdown rendered:
+https://github.com/gracecox/2016-01-06-bristol-bash/blob/master/exercises/shell.md
+
+Python lesson 
+
+
+
+
+
+
+If people have python 2 installed:
+
+If you already have anaconda and python 2.7 installed you can add python3 as a new environment with the command 'conda create -n python3 python=3.4 anaconda'. This installs python 3.4 alongside whatever you already have installed. 
+
+In order to switch from python 2.7 to python 3.4 you can then run 'source activate python3'. Anything installed after this point is part of the "python3" environment. 
+
+To drop out of this environemnt and return to your default setup run 'source deactivate'. The current environment is local to the particular shell and the command under Windows drops source.
+
+In IPython:
+use ! to run a system command
+e.g   !ls
+use % to run an IPython command
+e.g. %matplotlib inline
+use ? to get help about a function
+e.g matplotlib.pyplot.ylim?
+
+import numpy to use numerical arrays, functions, etc
+import matplotlib.pyplot to plot
+
+for loop syntax, e.g:
+for letter in word:
+    print(letter)
+
+N.B. indentation must be consistent, convention is 4 spaces
+
+
+Git lesson
+
+Notes and commands for the lesson can be found here:
+http://swcarpentry.github.io/git-novice/04-changes.html
+
+In git log:
+If you get stuck:
+    Hit q to escape!
+
+If you press git commit and forget to write -m and a message then to get out of the Vim code text editor press Esc : wq Enter
+
+stack overflow advice to get out of the evil VIM editor
+http://stackoverflow.com/questions/11828270/how-to-exit-the-vim-editor
+
+Plotting, Matloptlib and basemap lesson
+
+(a) Install a few new packages (this assumes you are using Python 3, Anaconda distribution). At a terminal prompt:
+    
+    conda install netCDF4
+    conda install ipywidgets
+    conda install basemap
+    
+    For windows basemap conflict with python3 can run python 2.7 instead:
+        conda create --name py27 python=2.7 netCDF4 ipywidgets basemap matplotlib nose
+        activate py27
+    
+(b) Create a  new directory and 'cd' into it
+
+(c) Get some data from Dropbox:
+    https://www.dropbox.com/s/f0qebhqjlkbw6tc/ncep-data.zip?dl=0
+    
+Unzip this and make sure the files are in the root of the directory you created in step (b) and not inside another directory!
+
+Some additional code snippets for later on:
+    
+# Set up some variables
+
+lon = f.variables['lon'][:]
+lat = f.variables['lat'][:]
+lon, lat = meshgrid(lon, lat)
+x, y = m(lon, lat)
+
+# A more complex function incorporating all aspects
+
+def sh(year='2013', var='air', time=0):
+    f = Dataset(var+'.sig995.'+year+'.nc')
+    vv = f.variables[var]
+    tt = f.variables['time']
+    dd = num2date(tt[time], tt.units)
+    m.fillcontinents(color='gray',lake_color='gray')
+    m.drawparallels(arange(-80.,81.,20.))
+    m.drawmeridians(arange(-180.,181.,20.))
+    m.drawmapboundary(fill_color='white')
+    cs = m.contourf(x,y,vv[time,:,:]-273.15)
+    #imshow(vv[time,:,:])
+
+
+Plotting some live (ish) earthquake data...
+
+Download the data first: http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/1.0_week.csv
+
+(This will download a file locally- move it into your working directory)
+
+http://andreww.github.io/2016-01-06-bristol/2016-01-06-bristol-testing.zip
+
+Testing lesson
+https://travis-ci.org
+can use GitHub credentials to log in
+
+.travis.yml:
+language: python
+python:
+  -"3.4"
+  -"nightly"
+install:
+  -"pip install -r requirements.txt"
+script: nosetests
+
+requirements.txt:
+nose
+numpy
+
+
+Proposed groups for day 3:
+    
+Group 1: (Twitter a) - line 89 for ideas
+James Hickey
+Adriana De Palma
+Erik Mackie
+Daniel Padfield
+James Duffy
+Rogier
+
+Chris Williams >> have set up a git and put up some ideas and links: https://github.com/Chris35Wills/twitter_data_visualisation -- thank you for doing this, it was excellent. I had no idea about those modules.
+Michael Cooper
+Jenny Jardine
+James Holt
+Victoria Burton
+Kathryn
+
+Group 3 (edge detection) - line 68 for ideas
+Ronan
+Beth Woodhams
+Will
+Marta 
+Sarah
+Laurence
+
+Group 4 (temperature) - line 137 for ideas
+Sam Doyle
+Marieanne
+Rogier
+Arminel
+Dave A
+Matt
+
+https://github.com/ArmLo/Group_4.git
+
+Images http://www.metoffice.gov.uk/public/weather/world-satellite/#?tab=satImg&map=regionalIR&fcTime=1452189600
+NCEP: http://www.esrl.noaa.gov/psd/data/gridded/data.ncep.reanalysis.html
+git remote add origin https://github.com/ArmLo/Group_4.git
+git push -u origin master
+
+Ideas:
+    
+Location: 
+coast of Peru:
+ 
+Variables:
+Air temperature 
+Surface pressure
+Wind
+Temperature anomalies
+
+Seasonal variations
+
+Basemap for windows:
+    Files and installation instructions are at: http://homepages.see.leeds.ac.uk/~earawa/Basemap_bristol_swcarp_2016_01_06.zip
+    
+    Solutions to the exercises we looked at in the shell, git and command-line python lessons are now in my repo: https://github.com/gracecox/2016-01-06-bristol-bash.git
+    
+    
+    Feedback
+Positive
+
+Git was good
+Lots of examples of code
+Mapping tools
+Lots of inspirational visualisation
+IPython Notebooks :)
+Not being bogged down with theory and syntax
+Alternating between topics
+Got confidence to use scripts found online
+Lots of support available
+Good balance of demonstration and practical
+GitHub :D
+Up-to-date course
+Keep the hackathon!
+Lunch!
+Travis
+
+Negative
+ 
+More examples on shell and python intergration
+More time on unit testing and travis
+getting left behing - someway to catch up
+wasn't sure about nose tests - explain the magic of nose tests
+how do i get back to bash - help I am in VI????? 
+lack of notes - repeating excersise later and keeping track
+not enough time on testing 
+starting at the wrong level on the wednesday day
+is there anything new to add but the course will get full > from __future__ import software_carpentry
+more ideas that don't realy on external data sources
+making testing work in my own situation 
+give code make tests or make tests and give code
+Microphones for speakers at the front
+delineate what is an "advance course" - pre-course survey - survey of what the particpants want to cover
+what is needed to know before the course to bring everyone up to the level
+working projector dim, blurry, colour
+
