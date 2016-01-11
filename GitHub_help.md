@@ -20,6 +20,14 @@ First time repository set-up
 
 NB/ origin is essentially the local folder and master is the remote
 
+-----------------------------------------
+Remember credentials for a period of time
+-----------------------------------------
+
+This saves you retyping your username and password for a period of time (set accordingly) whilst in a repo:
+
+	git config --global credential.helper "cache --timeout=3600"
+
 -----------------------
 Day to day file update
 -----------------------
