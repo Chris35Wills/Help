@@ -1,0 +1,11 @@
+OGR help
+========
+
+# Get info about shape file and print to text file
+# Make sure you name the layer that youa re interested in (in this case, the layer is called "all_basins" in the file all_basins.shp)
+
+ogrinfo -so  -fid 2 all_basins.shp all_basins > O:/Desktop/vector_info.txt
+
+gdal_rasterize -a FID -l all_basins_composite all_basins_composite.shp all_basins_composite.tif
+
+
