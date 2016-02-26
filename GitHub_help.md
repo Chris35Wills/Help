@@ -263,6 +263,23 @@ Create a new branch called moons:
 	> will merge master and moons branches
 		> if conflicts, fix the same way as with a git pull conflict (go in file, change, add and commit etc.)
 
+-----------
+Sorting out the *pathspec is in submodule* error
+-----------
+
+Read [this](http://git.661346.n2.nabble.com/quot-submodule-quot-mistake-and-a-problem-td7568253.html)
+
+In summary, if you get this error (likely when adding a subfolder in a a git directory), you can remove the path (which doesn;t delete the files) and then re-add everything.
+
+e.g.
+
+You are in folder test/ and you have a pathspec issue with test/problem/
+
+	git rm -f --cached path/to/subdir   # remove from index, keep files 
+	git add path/to/subdir
+	
+Now it should work. If not, make sure you don;t have any .git folders in the subfolders (likely to occur if you move a former repo into a new repo).
+
 ------------
 More reading
 ------------
