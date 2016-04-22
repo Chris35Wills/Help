@@ -14,4 +14,4 @@ See [here](https://www.tjhsst.edu/~dhyatt/supercomp/n401a.html)
 
 Simple example:
 
-	convert -delay 30 -loop 0 *.gif your_animation.gif
+	convert -delay 30 -loop 0 *.gif pathfinder_animation.gif
