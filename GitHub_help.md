@@ -126,8 +126,7 @@ This is useful if you have made a commit that you haven't yet/can't push
 2. git reset --hard commit_id
 	e.g. git reset --hard eb27bf26dd18c5a34e0e82b929e0d74cfcaab316
 
-IMPORTANT: Make sure you have a backup of your git repo in case you end up throwing away any uncommitted changes - this is somewhat annoying when you realise you've deleted work.
-
+IMPORTANT: This will remove any work you've done since the commit you are resetting to so make sure you have a BACKUP of your git repo somewhere else as this is somewhat annoying when you realise you've deleted work.
 
 ------------
 Colaborating
@@ -279,6 +278,37 @@ You are in folder test/ and you have a pathspec issue with test/problem/
 	git add path/to/subdir
 	
 Now it should work. If not, make sure you don;t have any .git folders in the subfolders (likely to occur if you move a former repo into a new repo).
+
+-----------
+Submodules
+-----------
+
+**ADD SUBMODULE TO REPO** 
+
+To keep git repos inside other git repos, you need to make use of submodules.
+
+e.g. We have a folder on git call functions - to store another git repo e.g. andys_filter inside it (to allow future push/pull), we must clone it into the functions repo using this:
+
+	> cd /path/to/functions
+	> git submodule add https:/path.to.repo/andys_filter
+	> git commit -m "Added andys_filter submodule"
+
+see here for more info: 
+http://stackoverflow.com/questions/1811730/how-do-i-work-with-a-git-repository-within-another-repository
+
+**CLONING WITH SUBMODULES** 
+
+To ensure submodules are cloned along with evrything else in the root module, you ned a few additional steps:
+
+	> git clone git://url...
+	> cd repo
+	> git submodule init
+	> git submodule update
+
+Then each time you want to pull updates:
+
+	> git pull ...
+	> git submodule update --recursive
 
 ------------
 More reading
