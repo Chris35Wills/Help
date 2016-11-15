@@ -58,6 +58,7 @@ NB/ If you have a directory problem e.g. " /tmp/temp_coords: Permission denied. 
 access it because you don;t have the permission!) 
 ****************************
 
+ls -d */ 			List all subdirectories in a directory
 ls -lh						List files in a directory + directories + size
 							(in a readable format)
 ls -la						List files in a directory + hidden files
@@ -152,6 +153,14 @@ find . -name \*png			Find files | in this directory (the ".") | with anything pr
 find -name "query"			Find files in your current directroy of "name" - case sensitive
 find -iname "query"			Find files in your current directroy of "name" - not case sensitive
 
+For a picture:
+
+	tree -P "*foo"
+	
+Or, pipe to grep:
+
+	find . -print | grep -i "some string*"
+
 Search for file (containing string):
 
 grep -rnw 'directory' -e "pattern"	
@@ -159,3 +168,34 @@ e.g. grep -rnw ./ -e "about"		Find files in current dir containing string 'about
 (see http://stackoverflow.com/questions/16956810/finding-all-files-containing-a-text-string-on-linux)
 
 ## http://www.howtogeek.com/112674/how-to-find-files-and-folders-in-linux-using-the-command-line/
+
+
+------------------------------------------------------
+
+Create a .zip:
+
+zip -r zipfile.zip directory e.g. zip -r ./stuff.zip . #(create stuff.zip in this directory of the stuff in this directory)
+
+------------------------------------------------------
+
+System log...
+
+More info here: http://www.oreilly.com/openbook/debian/book/ch07_04.html
+
+dmsg		write all the kernel messages to standard output (more often used redirected to less e.g. dmsg | less)
+
+More info here: http://www.linfo.org/dmesg.html
+
+last		To find out when a particular user last logged in to the Linux or Unix server
+
+More info here: http://www.cyberciti.biz/faq/linux-unix-last-command-examples/
+
+last | less | sort -k 4
+
+------------------------------------------------------
+
+Run program in the background:
+
+	nohup Rscript interior_perim_idw.r > log_perim.txt 2>&1
+
+Redirects all output to a file called log_perim.txt
