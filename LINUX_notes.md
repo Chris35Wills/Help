@@ -199,3 +199,11 @@ Run program in the background:
 	nohup Rscript interior_perim_idw.r > log_perim.txt 2>&1
 
 Redirects all output to a file called log_perim.txt
+
+-------------------------------------------------------
+
+Kill background job (e.g. wget)
+
+	ps -eaf | grep [w]get 
+	>> cw14910      1713  1709  0 Dec10 pts/0    00:00:00 wget ...
+	kill 1713
