@@ -1,0 +1,265 @@
+#Detection of geometric anisotropy:
+#Access the variable V of the Walker Lake data set:
+
+a1 <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/walker_lake_v.txt", header=TRUE)
+
+library(geoR)
+
+b1 <- as.geodata(a1)
+
+
+#Compute the variogram for the following directions:
+var1 <- variog(b1, dir=pi/2, tol=pi/4, max.dist=100)
+var2 <- variog(b1, dir=pi/2.57, tol=pi/4, max.dist=100)
+var3 <- variog(b1, dir=pi/3.6, tol=pi/4, max.dist=100)
+var4 <- variog(b1, dir=pi/6, tol=pi/4, max.dist=100)
+var5 <- variog(b1, dir=pi/18, tol=pi/4, max.dist=100)
+var6 <- variog(b1, dir=0.944*pi, tol=pi/4, max.dist=100)
+var7 <- variog(b1, dir=0.833*pi, tol=pi/4, max.dist=100)
+var8 <- variog(b1, dir=0.722*pi, tol=pi/4, max.dist=100)
+var9 <- variog(b1, dir=0.611*pi, tol=pi/4, max.dist=100)
+
+#Plot the variograms:
+plot(var1, ylim=c(0,120000))
+plot(var2, ylim=c(0,120000))
+plot(var3, ylim=c(0,120000))
+plot(var4, ylim=c(0,120000))
+plot(var5, ylim=c(0,120000))
+plot(var6, ylim=c(0,120000))
+plot(var7, ylim=c(0,120000))
+plot(var8, ylim=c(0,120000))
+plot(var9, ylim=c(0,120000))
+
+#From the plots above approximately find the distance at which the variograms reach the value of 80000:
+
+Direction	Distance
+pi/2		18.5
+pi/2.57		17.9
+pi/3.6		19.8
+dir=pi/6	23.2
+dir=pi/18	29.9
+dir=0.944*pi	32.9
+0.833*pi	29.3
+0.722*pi	25.8
+0.611*pi	21.4
+
+
+#Compute the coordinates:
+theta <- c(0, pi/9, pi/4.5, pi/3, pi/2.25, pi/18, pi/6, pi/3.6, pi/2.571)
+range <- c(18.5, 17.9, 19.8, 23.2, 29.9, 32.9, 29.3, 25.8, 21.4)
+
+x1 <- cos(theta[1:5])*range[1:5]
+y1 <- sin(theta[1:5])*range[1:5]
+ 
+x2 <- range[6:9]*sin(theta[6:9]) 
+y2 <- -range[6:9]*cos(theta[6:9])
+
+x11 <- -x1
+y11 <- -y1
+
+x22 <- -x2
+y22 <- -y2
+
+plot(x1,y1, xlim=c(-30,30), ylim=c(-35,35), xaxt="n", yaxt="n", 
+     ylab="y", xlab="x")
+points(x11,y11)
+points(x2,y2)
+points(x22,y22)
+ 
+segments(x1,y1, x11, y11)
+segments(x2,y2, x22, y22)
+
+segments(0, -34.8, 0, 34.8, lty=2)
+segments(-28, 0, 28, 0, lty=2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+========================================================================
+========================================================================
+#Example with two points:
+#Consider two points (11,8) and (10,30).
+#Euclidean distance:
+((11-10)^2+(8-30)^2)^.5   #It is equal to 22.02
+
+
+#Rotation theta matrix:
+a <- cos(pi/18)
+b <- sin(pi/18)
+xxx <- c(a,b,-b,a)
+
+#Create the rotation theta matrix:
+Rtheta <- matrix(xxx,nrow=2,ncol=2,byrow=TRUE)
+
+
+#Ratio of the two major axes:
+l <- 32.9/17.9
+yyy <- c(1,0,0,l)
+
+#Create the scaling matrix:
+Rl <- matrix(yyy, nrow=2, ncol=2, byrow=TRUE)
+
+#New coordinates:
+q <- c(11,10,8,30)
+qq <- matrix(q, nrow=2,ncol=2,byrow=TRUE)
+Rl %*% Rtheta %*% qq
+
+#New Euclidean distance:
+((12.22-15.06)^2+(10.97-51.11)^2)^.5  #It equal to 40.24.
+
+#Suppose we fit a spherical variogram with c1=80000 and alpha is equal to the range that corresponds to the major axis of the ellipse.  To compute the variogram between these two points use:
+8000*(1.5*40.24/32.9 - .5*40.24^3/32.9^3)  #It is equal to 7358.297.
+
+#We could have transformed the ellipse to a circle using the minor axis of the ellipse:
+l1 <- 17.9/32.9
+yyy1 <- c(l1,0,0,1)
+
+Rl1 <- matrix(yyy1, nrow=2,ncol=2, byrow=TRUE)
+
+#New coordinates:
+Rl1 %*% Rtheta %*% qq
+
+#New Euclidean distance of the two points using the new scaling matrix:
+((6.649698-8.192391)^2+(5.968332-27.807751)^2)^.5  #It equal to 21.89.
+
+#Again, we see that the variogram value between the two points is:
+8000*(1.5*21.89384/17.9 - .5*21.89384^3/17.9^3)  #It is equal to 7358.297.
+
+#We observe that we can rescale the ellipse to a circle either with radius equal to the range of the major axis or with radius equal to the range of the minor axis of the ellipse.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=============================================================
+=============================================================
+#Our data:
+a <- cos(pi/18)
+b <- sin(pi/18)
+xxx <- c(a,b,-b,a)
+
+#Create the theta matrix:
+Rtheta <- matrix(xxx,nrow=2,ncol=2,byrow=TRUE)
+
+#Ratio of the two major axes:
+l <- 32.9/17.9
+yyy <- c(1,0,0,l)
+
+#Create the l matrix:
+Rl <- matrix(yyy, nrow=2, ncol=2, byrow=TRUE)
+
+#Old coordinates:
+xy <- as.matrix(cbind(a1$x, a1$y))
+
+#New coordinates:
+xynew <- Rl %*% Rtheta %*% t(xy)
+
+#Plot the points:
+plot(a1$x,a1$y, xlim=c(10,300), ylim=c(-70,530), col="blue", pch=19)
+points(t(xynew)[,1], t(xynew)[,2])
+
+#Create a data frame with the new coordinates:
+cc <- as.data.frame(cbind(t(xynew), a1$v))
+names(cc) <- c("x", "y", "v")
+
+library(geoR)
+
+#Convert the data frame into a geodata object:
+ccc <- as.geodata(cc)
+
+#Compute the variogram in many directions:
+var11 <- variog(ccc, dir=pi/2, tol=pi/4, max.dist=100)
+var22 <- variog(ccc, dir=pi/2.57, tol=pi/4, max.dist=100)
+var33 <- variog(ccc, dir=pi/3.6, tol=pi/4, max.dist=100)
+var44 <- variog(ccc, dir=pi/6, tol=pi/4, max.dist=100)
+var55 <- variog(ccc, dir=pi/18, tol=pi/4, max.dist=100)
+var66 <- variog(ccc, dir=0.944*pi, tol=pi/4, max.dist=100)
+var77 <- variog(ccc, dir=0.833*pi, tol=pi/4, max.dist=100)
+var88 <- variog(ccc, dir=0.722*pi, tol=pi/4, max.dist=100)
+var99 <- variog(ccc, dir=0.611*pi, tol=pi/4, max.dist=100)
+
+#Plot these nine variograms:
+par(mfrow=c(3,3)) 
+plot(var11)
+plot(var22)
+plot(var33)
+plot(var44)
+plot(var55)
+plot(var66)
+plot(var77)
+plot(var88)
+plot(var99)
+
+
+#Compute the variograms using the original data to compare with the variograms above:
+b1 <- as.geodata(a1)
+
+var1 <- variog(b1, dir=pi/2, tol=pi/4, max.dist=100)
+var2 <- variog(b1, dir=pi/2.57, tol=pi/4, max.dist=100)
+var3 <- variog(b1, dir=pi/3.6, tol=pi/4, max.dist=100)
+var4 <- variog(b1, dir=pi/6, tol=pi/4, max.dist=100)
+var5 <- variog(b1, dir=pi/18, tol=pi/4, max.dist=100)
+var6 <- variog(b1, dir=0.944*pi, tol=pi/4, max.dist=100)
+var7 <- variog(b1, dir=0.833*pi, tol=pi/4, max.dist=100)
+var8 <- variog(b1, dir=0.722*pi, tol=pi/4, max.dist=100)
+var9 <- variog(b1, dir=0.611*pi, tol=pi/4, max.dist=100)
+
+#Plot these nine variograms:
+par(mfrow=c(3,3)) 
+plot(var1)
+plot(var2)
+plot(var3)
+plot(var4)
+plot(var5)
+plot(var6)
+plot(var7)
+plot(var8)
+plot(var9)
+
+

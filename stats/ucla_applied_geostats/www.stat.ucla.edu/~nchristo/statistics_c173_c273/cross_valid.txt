@@ -1,0 +1,85 @@
+#CROSS VALIDATION USING gstat:
+#We will use again the Maas river data from: 
+a <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/soil.txt", header=T) 
+# Save the original image function: 
+image.orig <- image 
+
+library(gstat)
+
+#We will randomly split the data in two parts. From the data, 100 observations will be used for modeling and 55 for prediction. Here are the commands: 
+choose100 <- sample(1:155, 100) 
+part_model <- a[choose100, ] 
+part_valid <- a[-choose100, ] 
+
+#Now, we can use the part model to estimate the variogram.
+g <- gstat(id="log_lead", formula = log(lead)~1, locations = ~x+y, 
+data=part_model) 
+q <- variogram(g) 
+plot(q) 
+v.fit <- fit.variogram(q, vgm(1, "Sph", 800, 1)) 
+plot(q, v.fit) 
+
+#The predictions will be performed on the 55 spatial locations of the part valid data set: 
+part_valid_pr <- krige(id="log_lead", log(lead)~1, locations=~x+y, 
+model=v.fit, data=part_model, newdata=part_valid) 
+
+#Let’s compute the diﬀerence between the predicted values and the true values: 
+difference <- log(part_valid$lead) - part_valid_pr$log_lead.pred 
+summary(difference)
+
+#Compute the prediction sum of squares:
+PRESS <- sum(difference^2)
+
+#A simple plot of the predicted values against the true values is shown below: 
+plot(part_valid_pr$log_lead.pred,log(part_valid$lead), 
+xlab="Observedvalues", ylab="Predictedvalues") 
+
+#The correlation coeﬃcient between these two sets of values is 
+cor(part_valid_pr$log_lead.pred,log(part_valid$lead))
+
+#A more automated way is to use the function krige.cv: 
+cv_pr<- krige.cv(log(lead)~1,data=a, locations=~x+y, 
+model=v.fit,nfold=nrow(a)) 
+
+#The krige.cv function returns the following: 
+names(cv_pr)
+
+#Compute the prediction sum of squares:
+PRESS <- sum(cv_pr$residual^2)
+=======================================================
+==============END CROSS VALIDATION WITH gstat==========
+=======================================================
+#CROSS VALIDATION USING geoR:
+library(geoR)
+#Construct a data frame with x, y, and log(lead): 
+bb <- cbind(a$x, a$y, log(a$lead)) 
+
+#Convert the data frame into a geodata object: 
+bbb <- as.geodata(bb) 
+
+#Computes the variogram with direction SW to NE: 
+var1 <- variog(bbb, dir=pi/4) 
+
+#Plot the variogram: 
+plot(var1) 
+
+#Fit the spherical variogram to the sample variogram: 
+fit1 <- variofit(var1, cov.model="sph", ini.cov.pars=c(0.3,1000), 
+fix.nugget=FALSE, nugget=0.1, wei="cressie") 
+
+#Draw the model variogram: 
+lines(fit1) 
+
+#Perform cross validation: 
+x_val1 <- xvalid(bbb, model=fit1)
+
+#Or re-estimating the variogram after we omit each data point:
+x_val2 <- xvalid(bbb, model=fit1, reest=TRUE, variog.obj=var1) 
+
+#Compute the prediction sum of squares:
+dif <- log(a$lead) - x_val1$predicted
+PRESS <- sum(dif^2)
+=======================================================
+==============END CROSS VALIDATION WITH geoR==========
+=======================================================
+

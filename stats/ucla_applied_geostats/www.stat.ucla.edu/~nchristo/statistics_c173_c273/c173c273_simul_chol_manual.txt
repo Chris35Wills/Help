@@ -1,0 +1,45 @@
+a <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/coords.txt", header=TRUE) 
+
+coord <- as.matrix(cbind(a$x, a$y))
+
+x1 <- rep(rep(0,nrow(a)),nrow(a))             #Initialize
+dist <- matrix(x1,nrow=nrow(a),ncol=nrow(a))  #the distance matrix 
+
+for (i in 1:nrow(a)){
+	for (j in 1:nrow(a)){
+	dist[i,j]=((coord[i,1]-coord[j,1])^2+(coord[i,2]-coord[j,2])^2)^0.5
+		}
+		}
+
+
+#2.  parameters:
+c0 <- 0
+c1 <- 0.0005
+alpha <- 3.0
+
+x1 <- rep(rep(0,nrow(a)),nrow(a))              #Initialize
+C1 <- matrix(x1,nrow=nrow(a),ncol=nrow(a))     #the C1 matrix
+
+for(i in 1:nrow(a)){
+	for (j in 1:nrow(a)){
+		C1[i,j]=c1-c1*(1.5*dist[i,j]/alpha - 0.5*dist[i,j]^3/alpha^3)
+                if(i==j){C1[i,j]=c0+c1}
+		if(dist[i,j] > 3){C1[i,j]=0}
+		}
+				}
+
+
+L <- chol(C1)
+
+e <- rnorm(nrow(a))
+mu <- 0.06
+
+data <- mu + t(L) %*% e
+
+
+aa <- as.data.frame(cbind(a[, 1:2], data))
+
+bb <- as.geodata(aa)
+
+points(bb)
+

@@ -1,0 +1,75 @@
+#Read the data:
+a <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/soil.txt", header=TRUE) 
+
+library(gstat)
+
+#ORDINARY KRIGING:
+g <- gstat(id="log_lead", formula = log(lead)~1, locations = ~x+y, 
+data = a) 
+
+plot(variogram(g))
+
+v.fit <- fit.variogram(variogram(g), vgm(0.5,"Sph",1000,0.1))
+
+plot(variogram(g), v.fit)
+
+x.range <- as.integer(range(a[,1])) 
+y.range <- as.integer(range(a[,2])) 
+grd <- expand.grid(x=seq(from=x.range[1], to=x.range[2], by=50), 
+y=seq(from=y.range[1], to=y.range[2], by=50)) 
+
+ok <- krige(id="log_lead",log(lead)~1, locations=~x+y, 
+model=v.fit, 
+data=a, newdata=grd) 
+
+#Cross validation:
+cv_ok<- krige.cv(log(lead)~1,data=a, locations=~x+y, 
+model=v.fit,nfold=nrow(a)) 
+
+
+
+#CO-KRIGING:
+#Create a gstat object:
+g1 <- gstat(id="log_lead", formula = log(lead)~1, locations = ~x+y, data = a) 
+#Append:
+g1 <- gstat(g1,id="log_zinc", formula = log(zinc)~1, locations = ~x+y, data = a) 
+
+#Plot the variograms and cross-variograms:
+plot(variogram(g1))
+
+#Fit a model variogram to the target variogram:
+g <- gstat(id="log_lead", formula = log(lead)~1, locations = ~x+y, data = a) 
+
+v.fit <- fit.variogram(variogram(g), vgm(0.5,"Sph",1000,0.1)) 
+
+#Fit a model variogram to all the variograms:
+g1 <- gstat(id="log_lead", formula = log(lead)~1, locations = ~x+y, data = a) 
+g1 <- gstat(g1,id="log_zinc", formula = log(zinc)~1, locations = ~x+y, data = a) 
+
+vm <- variogram(g1) 
+
+vm.fit <- fit.lmc(vm, g1, model=v.fit) 
+
+#Plot the fitted variograms to all the sample variograms:
+plot(variogram(g1),vm.fit)
+
+#Create the grid for predictions:
+x.range <- as.integer(range(a[,1])) 
+y.range <- as.integer(range(a[,2])) 
+grd <- expand.grid(x=seq(from=x.range[1], to=x.range[2], by=50), 
+y=seq(from=y.range[1], to=y.range[2], by=50)) 
+
+#Perform co-kriging predictions:
+ck <- predict.gstat(vm.fit, grd) 
+
+#Perform cross-validation:
+cv_ck <- gstat.cv(vm.fit)
+
+
+#COMPARE ORDINARY KRIGING WITH CO-KRIGING:
+sum(cv_ok$residual^2)
+
+sum(cv_ck$residual^2)
+
+
+

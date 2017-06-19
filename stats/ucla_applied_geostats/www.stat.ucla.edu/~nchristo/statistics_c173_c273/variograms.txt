@@ -1,0 +1,56 @@
+stat_c173_c273_exam1_w15.pdf#Power:
+quartz()
+h <- seq(0,2,.01)
+gh1 <- h^1
+gh2 <- h^.3
+gh3 <- h^1.5
+plot(h,gh1, main="Power semivariogram", type="l", xlab="h", ylab="Semivariogram")
+points(h,gh2, type="l")
+points(h,gh3, type="l")
+text(1.75,1.86,expression(paste(omega==1)))
+text(1.9,1.28,expression(paste(omega==0.3)))
+text(1.45,1.97,expression(paste(omega==1.5)))
+
+
+#Exponential:
+quartz()
+c0 <- 5
+c1 <- 10
+a <- 100
+h <- seq(0,1000,1)
+ghe <- c0+c1*(1-exp(-h/a))
+plot(h,ghe, ylim=c(0,20), type="l", xlab="h", ylab="Semivariogram", main="Exponential semivariogram")
+
+
+#Spherical:
+quartz()
+c0 <- 5
+c1 <- 10
+a <- 15
+h <- seq(0,45,0.01)
+ghs <- c0+c1*(1.5*(h/a)-0.5*(h/a)^3)
+plot(h,ghs, ylim=c(0,16), type="l", xlim=c(0,31), main="Spherical function - range?", xlab="h", ylab="Semivariogram")
+
+
+#Instead:
+quartz()
+h <- seq(0,15,0.01)
+ghs <- c0+c1*(1.5*(h/a)-0.5*(h/a)^3)
+plot(h,ghs, ylim=c(0,16), type="l", xlim=c(0,45),  main="Spherical semivariogram", xlab="h", ylab="Semivariogram")
+
+lines(seq(15,45,1),rep(15,31), type="l")
+
+
+#Gaussion:
+quartz()
+c0 <- 5
+c1 <- 10
+a <- 100
+
+h <- seq(0,300,1)
+ 
+ghg <- c1*(1-exp(-h^2/a^2))
+
+plot(h,ghg, ylim=c(0,10), type="l", main="Gaussian semivariogram", xlab="h", ylab="Semivariogram")
+
+

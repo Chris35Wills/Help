@@ -1,0 +1,19 @@
+#Simple kriging
+#Data:
+b <- read.table("kriging_11.txt", header=TRUE)
+
+#A.  geoR
+library(geoR)
+b3 <- as.geodata(b)
+sk1 <- ksline(b3, cov.model="exp", cov.pars=c(10,3.33), nugget=0, 
+locations=c(65,137), m0=600)
+
+
+#B. gstat
+library(gstat)
+grd <- as.data.frame(cbind(65,137))
+names(grd) <- c("x", "y")
+m <- vgm(10, "Exp", 3.33, 0)
+sk2 <- krige(id="z", formula=z~1, data=b, newdata=grd, model = m, 
+locations=~x+y, beta=600)
+

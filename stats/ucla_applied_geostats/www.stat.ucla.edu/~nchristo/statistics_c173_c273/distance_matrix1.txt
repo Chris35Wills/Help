@@ -1,0 +1,12 @@
+#Read the Jura data:
+a <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/jura.txt", header=TRUE)
+
+#We want to compute the distance matrix, 359x359 matrix.
+x1 <- rep(rep(0,359),359)             #Initialize
+dist <- matrix(x1,nrow=359,ncol=359)  #the distance matrix 
+
+for (i in 1:359){
+	for (j in 1:359){
+		dist[i,j]=((a[i,1]-a[j,1])^2+(a[i,2]-a[j,2])^2)^.5		
+		}
+		}

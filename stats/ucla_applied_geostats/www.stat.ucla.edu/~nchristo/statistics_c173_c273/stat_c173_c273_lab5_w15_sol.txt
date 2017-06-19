@@ -1,0 +1,107 @@
+#This is the Jura data set.
+
+#Read the data:
+a <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/jura.txt", header=TRUE)
+
+image.orig <- image
+library(gstat)
+
+#Create a gstat object:
+g1 <- gstat(id="Pb", formula = log(Pb)~1, locations = ~x+y, data = a) 
+#Append:
+g1 <- gstat(g1,id="Cu", formula = log(Cu)~1, locations = ~x+y, data = a)
+g1 <- gstat(g1,id="Zn", formula = log(Zn)~1, locations = ~x+y, data = a)
+
+#Plot the sample variograms:
+plot(variogram(g1))
+
+#Fit a model to the first variogram:
+g <- gstat(id="Pb", formula = log(Pb)~1, locations = ~x+y, data = a) 
+
+v.fit <- fit.variogram(variogram(g), vgm(0.20,"Exp",1.5,0.10))
+
+plot(variogram(g),v.fit)
+
+vm <- variogram(g1) 
+
+#Fit a model to all the variograms:
+vm.fit <- fit.lmc(vm, g1, model=v.fit)
+
+vm.fit
+
+plot(variogram(g1),vm.fit)
+#or
+plot(vm,vm.fit)
+
+#Create the grid:
+x.range <- as.integer(range(a[,1])) 
+y.range <- as.integer(range(a[,2])) 
+grd <- expand.grid(x=seq(from=x.range[1], to=x.range[2], by=0.05), 
+y=seq(from=y.range[1], to=y.range[2], by=0.05))
+
+#Perform co-kriging predictions:
+ck <- predict.gstat(vm.fit, grd) 
+
+#Perform co-kriging cross-validation and compute PRESS:
+cv_ck <- gstat.cv(vm.fit)
+PRESS_ck <- sum(cv_ck$residual^2)
+
+CROSS VALIDATION USING ORDINARY KRIGING
+gg <- gstat(id="Pb", formula = log(Pb)~1, locations = ~x+y, data = a) 
+
+plot(variogram(gg))
+v.fit <- fit.variogram(variogram(gg), vgm(0.20,"Exp",1.5,0.10))
+
+plot(variogram(gg),v.fit)
+
+#Cross validation for ordinary kriging using the function krige.cv: 
+cv_pr<- krige.cv(log(Pb)~1,data=a, locations=~x+y, 
+model=v.fit,nfold=nrow(a)) 
+
+#Compute the prediction sum of squares:
+PRESS_ok <- sum(cv_pr$residual^2)
+
+
+
+#Compare PRESS_ok with PRESS_ck.
+
+
+#Collapse the predicted values into a matrix: 
+qqq <- matrix(ck$Pb.pred, 
+length(seq(from=x.range[1], to=x.range[2], by=0.05)), 
+length(seq(from=y.range[1], to=y.range[2], by=0.05))) 
+
+#Raster map:
+image.orig(seq(from=x.range[1], to=x.range[2], by=0.05), 
+seq(from=y.range[1],to=y.range[2], by=0.05), qqq, 
+xlab="Westto East",ylab="South to North", main="Predicted values") 
+
+#Add the observed data points on the raster map:
+points(a)
+
+#We want to assign "NA" values for the region outside the observed data #points:
+X <- seq(from=x.range[1], to=x.range[2], by=0.05)
+Y <- seq(from=y.range[1], to=y.range[2], by=0.05)
+
+dz.mask <- function(grid, pts, x.dom, y.dom, window, mitre=2) {
+	N <- length(pts[ ,1]) ; mask <- array( NA, dim(grid) )
+	for(j in 1:N) {
+		dx <- abs(x.dom - pts$x[j])
+		dy <- abs(y.dom - pts$y[j])
+		d.Mx <- tcrossprod( dx , rep(1, length(dy)) )^mitre + 
+		tcrossprod( rep(1, length(dx)), dy )^mitre
+		mask[ d.Mx < window^mitre ] <- FALSE
+	}
+	return(mask+grid)
+}
+
+qqq.masked <- dz.mask(qqq, a, X, Y, 0.3)
+
+image.orig(X,Y,qqq.masked)
+points(a)
+
+
+#Add contour lines:
+contour(seq(from=x.range[1], to=x.range[2], by=0.05), 
++ seq(from=y.range[1],to=y.range[2], by=0.05), qqq.masked, 
+levels=seq(3, 5.5, by=.2), add=TRUE, col="black", labcex=1) 

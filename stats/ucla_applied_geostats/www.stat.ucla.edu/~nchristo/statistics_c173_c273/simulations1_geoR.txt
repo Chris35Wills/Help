@@ -1,0 +1,32 @@
+#Simulations on locations randomly selected on the unit square:
+#Using the spherical model:
+sim1 <- grf(100, cov.model="sph",cov.pars = c(1, .25), nsim=5)
+
+var1 <- variog(sim1, max.dist=1)
+
+plot(var1, type="l", lty=2:6)
+
+lines.variomodel(cov.model="sph", cov.pars = c(1, .25),nugget=0, max.dist=1, lwd=3)
+
+
+#Using the exponential model:
+sim1 <- grf(100, cov.model="exp",cov.pars = c(1, .25), nsim=5)
+
+var1 <- variog(sim1, max.dist=1)
+
+plot(var1, type="l", lty=2:6)
+
+lines.variomodel(cov.model="exp", cov.pars = c(1, .25),nugget=0, max.dist=1, lwd=3)
+========================================================================
+#Simulating Z(s) at spatial locations s1, s2, ..., sn:
+a <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/soil.txt", header=T) 
+
+xx <- as.matrix(cbind(a$x,a$y))
+
+sim1 <- grf(grid=xx, cov.model="exp",cov.pars = c(1, 300), nugget=0.2, nsim=1)
+
+var1 <- variog(sim1, max.dist=1200)
+
+plot(var1)
+
+lines.variomodel(cov.model="exp", cov.pars = c(1, 300),nugget=0.2, max.dist=1200, lwd=3)

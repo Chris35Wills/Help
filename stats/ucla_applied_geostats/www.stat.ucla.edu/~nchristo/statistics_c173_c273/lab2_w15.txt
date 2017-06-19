@@ -1,0 +1,124 @@
+#Access the Jura data set:
+a <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/jura.txt", header=TRUE)
+
+#Compute semivariograms using geoR:
+librarty(geoR)
+
+#First, get the maximum distance:
+b <- as.geodata(a)
+summary(b)
+
+#Use variable Cd:
+bCd <- as.geodata(a[, c(1,2,5)])
+varCd <- variog(bCd, max.dist=3)
+plot(varCd)
+
+#Fit "by eye" a theoretical variogram:
+lines.variomodel(cov.model="sph", cov.pars=c(.2,1.5), nug=0.5, max.dist=3.5)
+
+
+#Similarly do the same for the other variables.  For example, Zn:
+bZn <- as.geodata(a[, c(1,2,11)])
+varZn <- variog(bZn, max.dist=3)
+plot(varZn)
+
+lines.variomodel(cov.model="sph", cov.pars=c(500,1.5), nug=500, max.dist=3.5)
+
+
+#Indicator semivariograms:
+#Transform your data into 0, 1 data based on some threshold.  Use variable Cd:
+
+I <- ifelse(a$Cd >= 1.1, 1,0)
+
+bI <- as.geodata(cbind(a[,c(1,2)],I))
+
+varI <- variog(bI)
+
+plot(varI)
+
+lines.variomodel(cov.model="gaussian", cov.pars=c(0.05,2), nug=0.2, max.dist=5.5)
+
+
+#Or using max.dist=2:
+I <- ifelse(a$Cd >= 1, 1,0)
+
+bI <- as.geodata(cbind(a[,c(1,2)],I))
+
+varI <- variog(bI, max.dist=2)
+
+plot(varI)
+
+lines.variomodel(cov.model="sph", cov.pars=c(0.1,1.0), nug=0.15, max.dist=5.5)
+
+================================================================================
+================================================================================
+#North Carolina SIDS data:
+a <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/nc_sids.txt", header=TRUE)
+
+b <- as.geodata(a)
+summary(b)
+
+#Transform the data:
+Q1 <- 1000*(a$sids+1)/a$birth
+
+b <- as.data.frame(cbind(a[,1:2], Q1))
+
+bb <- as.geodata(b)
+
+var1 <- variog(bb, max.dist=280)
+
+plot(var1)
+
+lines.variomodel(cov.model="sph", cov.pars=c(1.2,100), nug=1.3, max.dist=250)
+
+=================================================================================
+=================================================================================
+#Coal ash data:
+a <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/coal_ash.txt", header=TRUE)
+
+library(geoR)
+
+b <- as.geodata(a)
+summary(b)
+
+#Plot the data
+#Convert the data into geodata
+#Find maximum distance
+#Compute variogram up to distance 10 for direction east-west.
+	-Classical
+	-Robust
+#Plot the two semivariograms on the same plot.
+#Plot the two variograms on the same plot.  Note:  geoR compute semivariograms.  Multiply by 2 to get the variogram.
+#Fit theoretical models by eye to both semivariograms.
+#Compute the variogram cloud for both estimators for direction east-west and then construct the box plot for each cloud.
+
+#Classical semivariogram:
+var1 <- variog(b, dir=pi/2, max.dist=10)
+plot(var1, xlim=c(0,10), ylim=c(0,8))
+
+#Robust semivariogram:
+var2 <- variog(b, dir=pi/2, max.dist=10, estimator.type="modulus")
+ points(var2$u, var2$v, col="green")
+
+#Fit model semivariograms:
+lines.variomodel(cov.model="gau", cov.pars=c(1.2,4), nug=0.8, max.dist=10)
+
+
+#Plot variograms:
+plot(var1$u, 2*var1$v, xlim=c(0,10), ylim=c(0,8))
+points(var2$u, 2*var2$v, col="green")
+
+
+#Cloud:
+cloud1 <- variog(b, dir=pi/2, bin.cloud=T, max.dist=10)cloud2 <- variog(b, dir=pi/2,, bin.cloud=T, estimator.type="modulus", max.dist=10)par(mfrow=c(1,2))plot(cloud1, bin.cloud=T)plot(cloud2, bin.cloud=T)
+
+#Or you can do this:
+par(mfrow=c(1,2))
+boxplot(cloud1$bin.cloud)
+boxplot(cloud2$bin.cloud)
+
+
+
+
+
+

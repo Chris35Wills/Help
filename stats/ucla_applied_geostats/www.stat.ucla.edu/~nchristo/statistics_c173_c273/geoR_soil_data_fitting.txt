@@ -1,0 +1,42 @@
+#Variogram fitting
+
+a <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/soil.txt",  header=TRUE)
+
+library(geoR)
+b <- as.geodata(a)
+
+
+#Compute variogram:
+var1 <- variog(b, max.dist=1800)
+
+#Plot the variogram:
+plot(var1)
+
+#Fit by eye a theoretical variogram (spherical):
+lines.variomodel(cov.model="sph", cov.pars=c(10000,1000), nug=5000, max.dist=1800, lty=2)
+
+
+#Fit the spherical variogram using the default option (check ?variofit manual).
+fit1 <- variofit(var1, cov.model="sph", ini.cov.pars=c(10000,1000),       fix.nugget=FALSE, nugget=5000)lines(fit1, lty=1)
+
+#Use Cressies weights:
+fit2 <- variofit(var1, cov.model="sph", weights="cressie", ini.cov.pars=c(10000,1000),       fix.nugget=FALSE, nugget=5000)lines(fit2, lty=1, col="green")
+
+#Use equal weights (simply OLS):
+fit3 <- variofit(var1, cov.model="sph", ini.cov.pars=c(10000,1000), weights="equal"       fix.nugget=FALSE, nugget=5000)lines(fit3, lty=1, col="orange")
+
+
+
+
+
+
+#MML:
+ml <- likfit(b, cov.model="sph", ini.cov.pars=c(10000,1000),       fix.nugget=FALSE, nugget=5000)
+
+lines(ml, col="blue")
+
+#REML:
+rml <- likfit(b, cov.model="sph", ini.cov.pars=c(10000,1000),       fix.nugget=FALSE, nugget=5000, lik.method = "RML" )
+
+lines(rml, col="purple")
+

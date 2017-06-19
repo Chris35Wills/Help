@@ -1,0 +1,43 @@
+a <- read.table("kriging_1.txt", header=TRUE)
+b <- read.table("kriging_11.txt", header=TRUE)
+
+x <- as.matrix(cbind(a$x, a$y))
+
+x1 <- rep(rep(0,8),8)             #Initialize
+dist <- matrix(x1,nrow=8,ncol=8)  #the distance matrix 
+
+for (i in 1:8){
+	for (j in 1:8){
+		dist[i,j]=((x[i,1]-x[j,1])^2+(x[i,2]-x[j,2])^2)^.5		
+		}
+		}
+
+c0 <- 0
+c1 <- 10
+alpha <- 3.33
+
+x1 <- rep(rep(0,8),8)              #Initialize
+C <- matrix(x1,nrow=8,ncol=8)     #the C matrix
+
+for(i in 1:8){
+	for (j in 1:8){
+		C[i,j]=c1*exp(-dist[i,j]/alpha)
+                if(i==j){C[i,j]=c0+c1}
+		if(i==8){C[i,j]=1}	
+		if(j==8){C[i,j]=1}
+		if(i==8 & j==8) {C[i,j]=0}
+				}
+				}
+
+c <- rep(0,8)                    #Initialize
+                                  #the c vector
+
+for(j in 1:8){
+	c[j]=c1*exp(-dist[8,j]/alpha)
+	if(j == 8) {c[j]=1}
+		}
+
+w <- solve(C) %*% c          #Obtain the weights and the Lagrange parameter
+
+z_hat <- w[-8] %*% b$z         #Compute the estimate
+var_z_hat <- c0+c1 - t(w) %*% c  #Compute the variance of the estimate 

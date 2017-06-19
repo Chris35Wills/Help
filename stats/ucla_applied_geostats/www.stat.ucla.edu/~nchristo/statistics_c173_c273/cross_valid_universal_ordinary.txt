@@ -1,0 +1,23 @@
+site="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/wolfcamp.txt"
+a <- read.table(file=site, header=TRUE)
+
+library(gstat)
+
+g <- gstat(id="level", formula = level~x+y, locations = ~x+y, data=a) 
+
+q <- variogram(g) 
+plot(q) 
+v.fit <- fit.variogram(q, vgm(30000, "Sph", 70, 10000)) 
+
+plot(q, v.fit)
+v.fit
+
+#Cross validation:
+#Universal kriging:
+cv_pr_u<- krige.cv(level~x+y,data=a, locations=~x+y, model=v.fit,nfold=nrow(a))
+sum(cv_pr_u$residual^2)
+
+#Ordinary kriging:
+cv_pr_o<- krige.cv(level~1,data=a, locations=~x+y, model=v.fit,nfold=nrow(a))
+sum(cv_pr_o$residual^2)
+

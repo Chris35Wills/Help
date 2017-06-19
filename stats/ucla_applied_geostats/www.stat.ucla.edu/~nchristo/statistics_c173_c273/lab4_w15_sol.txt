@@ -1,0 +1,46 @@
+#Part (a):
+a <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/soil_ca_mg_data.txt", header=TRUE)
+
+data <- as.data.frame(cbind(a$east, a$north, a$ca020))names(data) <- c("x", "y", "ca020")
+
+# Create the grid:x.range <- as.integer(range(data[,1]))y.range <- as.integer(range(data[,2]))grd <- expand.grid(x=seq(from=x.range[1], to=x.range[2], by=10),y=seq(from=y.range[1], to=y.range[2], by=10))
+
+#Part (b):
+#idw
+library(gstat)
+
+idw.out <- idw(ca020~1, locations=~x+y, data, grd)
+
+
+#Part c:
+#Collapse the predicted values into a matrix:qqq <- matrix(idw.out$var1.pred,length(seq(from=x.range[1], to=x.range[2], by=10)),length(seq(from=y.range[1], to=y.range[2], by=10)))#Use image function:image(seq(from=x.range[1], to=x.range[2], by=10),seq(from=y.range[1], to=y.range[2], by=10), qqq,xlab="West to East", ylab="South to North")
+
+
+#Add contours:
+#Find first the range of the values:
+range(idw.out$var1.pred)
+
+contour(seq(from=x.range[1], to=x.range[2], by=10), 
+seq(from=y.range[1],to=y.range[2], by=10), qqq, add=TRUE, col="black", 
+levels=seq(20, 80, by=5), labcex=1)
+
+
+#Part (d):
+q1 <- krige(id="ca020", formula=ca020~1, locations=~x+y, data, newdata=grd,  degree=1)
+
+
+q2 <- krige(id="ca020", formula=ca020~1, locations=~x+y, data, newdata=grd,  degree=2)
+
+#Raster map of the predict values:
+qqq_pred <- matrix(q2$ca020.pred,length(seq(from=x.range[1], to=x.range[2], by=10)),length(seq(from=y.range[1], to=y.range[2], by=10)))
+
+image(seq(from=x.range[1], to=x.range[2], by=10),seq(from=y.range[1], to=y.range[2], by=10), qqq_pred,xlab="West to East", ylab="South to North")
+
+
+#Raster map of the variances:
+qqq_var <- matrix(q2$ca020.var,length(seq(from=x.range[1], to=x.range[2], by=10)),length(seq(from=y.range[1], to=y.range[2], by=10)))
+
+image(seq(from=x.range[1], to=x.range[2], by=10),seq(from=y.range[1], to=y.range[2], by=10), qqq_var,xlab="West to East", ylab="South to North")
+
+
+

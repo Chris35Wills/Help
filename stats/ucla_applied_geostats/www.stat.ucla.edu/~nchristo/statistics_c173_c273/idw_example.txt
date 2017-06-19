@@ -1,0 +1,15 @@
+# Read the data:a <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/wolfcamp.txt", header=T)
+# Load the gstat package:library(gstat)# Create the grid:x.range <- as.integer(range(a[,1]))x.rangey.range <- as.integer(range(a[,2]))y.rangegrd <- expand.grid(x=seq(from=x.range[1], to=x.range[2], by=2),y=seq(from=y.range[1], to=y.range[2], by=2))
+
+#Predict data points on the grid:idw.out <- idw(level~1, locations=~x+y, a, grd)
+
+#Collapse the predicted values into a matrix:qqq <- matrix(idw.out$var1.pred,length(seq(from=x.range[1], to=x.range[2], by=2)),length(seq(from=y.range[1], to=y.range[2], by=2)))#Construct a raster map using the image function:image(seq(from=x.range[1], to=x.range[2], by=2),seq(from=y.range[1], to=y.range[2], by=2), qqq,xlab="West to East", ylab="South to North")
+
+#Add contours:
+#Find first the range of the values:
+range(idw.out$var1.pred)
+
+contour(seq(from=x.range[1], to=x.range[2], by=2), 
+seq(from=y.range[1],to=y.range[2], by=2), qqq, add=TRUE, col="black", 
+levels=seq(1000, 3600, by=100), labcex=1)
+

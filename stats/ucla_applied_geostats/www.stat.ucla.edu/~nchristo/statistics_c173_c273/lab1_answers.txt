@@ -1,0 +1,86 @@
+#EXERCISE 1:
+a <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/jura.txt", header=TRUE)
+
+#Histograms:
+par(mfrow=c(4,2))
+hist(a$Cd)
+hist(a$Co)
+hist(a$Cr)
+hist(a$Cu)
+hist(a$Ni)
+hist(a$Pb)
+hist(a$Zn)
+
+
+#Boxplots:
+par(mfrow=c(4,2))
+boxplot(a$Cd)
+boxplot(a$Co)
+boxplot(a$Cr)
+boxplot(a$Cu)
+boxplot(a$Ni)
+boxplot(a$Pb)
+boxplot(a$Zn)
+
+
+#Empirical cdf:
+par(mfrow=c(4,2))
+plot(ecdf(a$Cd), verticals=TRUE, do.points=FALSE)
+plot(ecdf(a$Co), verticals=TRUE, do.points=FALSE)
+plot(ecdf(a$Cr), verticals=TRUE, do.points=FALSE)
+plot(ecdf(a$Cu), verticals=TRUE, do.points=FALSE)
+plot(ecdf(a$Ni), verticals=TRUE, do.points=FALSE)
+plot(ecdf(a$Pb), verticals=TRUE, do.points=FALSE)
+plot(ecdf(a$Zn), verticals=TRUE, do.points=FALSE)
+
+
+#Distance matrix:
+#We want to compute the 359x359 distance matrix.
+x1 <- rep(rep(0,359),359)             #Initialize
+dist <- matrix(x1,nrow=359,ncol=359)  #the distance matrix 
+
+for (i in 1:359){
+	for (j in 1:359){
+		dist[i,j]=((a[i,1]-a[j,1])^2+(a[i,2]-a[j,2])^2)^.5		
+		}
+		}
+
+
+#h-scatterplots:
+library(gstat)
+coordinates(a) <- ~x+y
+hscat(Cu~1, a, c(0,.05,.1,.15,.20))
+hscat(Cu~1, a, c(0,.05,.1,.15,.20,.3,.4))
+
+======================================================================
+======================================================================
+#EXERCISE 2:
+#Distance matrix and covariance matrix:
+x <- c(2,2,4,4)
+y <- c(4,2,2,4)
+
+q <- as.data.frame(cbind(x,y))
+
+#We want to compute the distance matrix, 4x4 matrix.
+x1 <- rep(rep(0,4),4)             #Initialize
+dist <- matrix(x1,nrow=4,ncol=4)  #the distance matrix 
+
+                               #Initialize
+C <- matrix(x1,nrow=4,ncol=4)  #the covariance matrix 
+
+
+for (i in 1:4){
+	for (j in 1:4){
+		dist[i,j]=((q[i,1]-q[j,1])^2+(q[i,2]-q[j,2])^2)^.5
+		C[i,j]=2.5*exp(-dist[i,j]/2)
+		}
+		}
+
+#Compute the variance of the predictor:
+a <- c(0.5, 0.2, 0.2, 0.1)
+var_z_hat <- t(a) %*% C %*% a
+
+var_z_hat
+         [,1]
+[1,] 1.382143
+

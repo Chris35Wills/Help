@@ -1,0 +1,90 @@
+library(maps)
+library(geoR)
+
+q <- map("county", "alabama")
+
+xx <- runif(200,q$range[1], q$range[2])
+yy <- runif(200,q$range[3], q$range[4])
+
+
+in.what.state <- map.where(database="state", xx, yy) 
+in.this.state <- which(in.what.state=="alabama")
+locations <- as.data.frame(cbind(xx,yy))
+loc <- locations[in.this.state,]
+
+map("county", "alabama")
+points(loc)
+
+xx <- as.matrix(loc)
+
+sim1 <- grf(grid=xx, cov.model="exp",cov.pars = c(1, 30), nugget=0.2, mean=1, nsim=1)
+
+my_data <- as.data.frame(cbind(loc, sim1$data))
+names(my_data)  <- c("x", "y", "z")
+
+map("county", "alabama")
+points(my_data$x, my_data$y, cex=my_data$z/mean(my_data$z))
+
+write.table(my_data, "alabama1.txt", row.names=FALSE)
+
+============================================================
+============================================================
+library(maps)
+library(geoR)
+
+q <- map("county", "ca")
+
+xx <- runif(200,q$range[1], q$range[2])
+yy <- runif(200,q$range[3], q$range[4])
+
+
+in.what.state <- map.where(database="state", xx, yy) 
+in.this.state <- which(in.what.state=="california")
+locations <- as.data.frame(cbind(xx,yy))
+loc <- locations[in.this.state,]
+
+map("county", "ca")
+points(loc)
+
+xx <- as.matrix(loc)
+
+sim1 <- grf(grid=xx, cov.model="exp",cov.pars = c(1, 30), nugget=0.2, mean=1, nsim=1)
+
+my_data <- as.data.frame(cbind(loc, sim1$data))
+names(my_data)  <- c("x", "y", "z")
+
+map("county", "ca")
+points(my_data$x, my_data$y, cex=my_data$z/mean(my_data$z))
+
+write.table(my_data, "ca1.txt", row.names=FALSE)
+
+============================================================
+============================================================
+library(maps)
+library(geoR)
+
+q <- map("world", "China")
+
+xx <- runif(200,q$range[1], q$range[2])
+yy <- runif(200,q$range[3], q$range[4])
+
+
+in.what.country <- map.where(database="world", xx, yy) 
+in.this.country <- which(in.what.country=="China")
+locations <- as.data.frame(cbind(xx,yy))
+loc <- locations[in.this.country,]
+
+map("world", "China")
+points(loc)
+
+xx <- as.matrix(loc)
+
+sim1 <- grf(grid=xx, cov.model="exp",cov.pars = c(1, 30), nugget=0.2, mean=1, nsim=1)
+
+my_data <- as.data.frame(cbind(loc, sim1$data))
+names(my_data)  <- c("x", "y", "z")
+
+map("world", "China")
+points(my_data$x, my_data$y, cex=my_data$z/mean(my_data$z))
+
+write.table(my_data, "china1.txt", row.names=FALSE)

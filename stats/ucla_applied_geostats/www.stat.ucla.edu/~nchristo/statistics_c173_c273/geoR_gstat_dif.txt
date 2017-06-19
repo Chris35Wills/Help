@@ -1,0 +1,44 @@
+#geoR:  Exact interpolation:
+#First with nugget=0:
+a <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/kriging_11.txt", header=TRUE)library(geoR)
+b <- as.geodata(a)
+
+q <- ksline(b, cov.model="exp", cov.pars=c(10,3.33), nugget=0,  locations=c(61,139))
+
+q$predict
+
+q$krige.var
+
+#Then with nugget=2:
+a <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/kriging_11.txt", header=TRUE)library(geoR)
+b <- as.geodata(a)
+
+q <- ksline(b, cov.model="exp", cov.pars=c(10,3.33), nugget=2,  locations=c(61,139))
+
+q$predict
+
+q$krige.var
+
+
+=========================================================================
+#gstat:  Exact interpolation:
+#First with nugget=0:
+
+a <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/kriging_11.txt", header=TRUE)library(gstat)
+
+x.range <- as.integer(range(a[,1]))y.range <- as.integer(range(a[,2]))grd <- expand.grid(x=seq(from=x.range[1], to=x.range[2], by=1),  y=seq(from=y.range[1], to=y.range[2], by=1))
+
+m <- vgm(10, "Exp", 3.33, 0)
+
+q1 <- krige(id="z", formula=z~1, data=a, newdata=grd, model = m,  locations=~x+y)
+
+q1
+
+
+#Then with nugget=2:
+m <- vgm(10, "Exp", 3.33, 2)
+
+q1 <- krige(id="z", formula=z~1, data=a, newdata=grd, model = m,  locations=~x+y)
+
+q1
+

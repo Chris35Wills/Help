@@ -1,0 +1,854 @@
+<HTML>
+<HEAD>
+<TITLE> Nicolas Christou's classes... 
+</TITLE>
+</HEAD>
+<BODY>
+
+<H1 align="center"> <font COLOR="#336600" face="arial"> 
+Statistics C173/C273: Applied Geostatistics
+</font></H1>
+
+<H3> <BLINK> Announcements </BLINK> </H3>
+<UL>
+<LI> First lecture is on Monday, 05 January 2015. <BR>
+Location: KINSEY PAVILION 1200B.  <BR>
+Day/time: 11:00 - 11:50. <BR> 
+See you then! <BR> </BR>
+
+
+<!--
+<LI>  Final projects due during the finals week:  M 4-6 pm, T 1-4 pm, W 4-6 pm, R 11 am - 2 pm, F 12-2 pm.
+</UL>
+-->
+
+
+<LI> For the course syllabus click
+<a href="syllabusc173c273_w15.pdf"> here</a>.  <BR>
+</H4>
+
+<!--
+<LI> <a href="http://wiki.stat.ucla.edu/socr/index.php/
+SOCR_EduMaterials_Activities_Binomial_Distributions"> Geometric, Binomial, Hypergeometric probability distributions using SOCR... </a><BR>
+<H4> <IMG SRC="geometric.jpg" HEIGHT="600" WIDTH="800"> </A> </H4>
+<H4> <IMG SRC="binomial.jpg" HEIGHT="600" WIDTH="800"> </A> </H4>
+<H4> <IMG SRC="hypergeometric.jpg" HEIGHT="600" WIDTH="800"> </A> </H4>
+-->
+
+
+<H3> <P> Useful links: </P> </H3>
+Statistics Online Computational Resource (SOCR):
+<LI> <a href="http://www.socr.ucla.edu">  http://www.socr.ucla.edu </a><BR>
+
+<LI> <a href="http://wiki.stat.ucla.edu/socr/index.php/SOCR_EduMaterials"> 
+http://wiki.stat.ucla.edu/socr/index.php/SOCR_EduMaterials </a>
+
+<LI> <a href="http://cran.stat.ucla.edu/"> Download R and packages. </a>
+
+<LI> <a href="http://grass.itc.it/"> GRASS website. </a>
+
+<LI> <a href="http://grass.osgeo.org/wiki/"> GRASS Wiki site. </a>
+
+<LI> <a href="http://grass.ibiblio.org/gdp/html_grass63/"> GRASS manual - version 6.3. </a>
+
+<LI> <a href="http://grass.ibiblio.org/gdp/html_grass64/"> GRASS manual - version 6.4. </a>
+
+
+<H3> <P> Data sets </P> </H3>
+Copy and paste each line below at the R command line to acces the data: <BR>
+a1 <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/wolfcamp.txt", header=TRUE) <BR>
+a2 <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/walker_lake_v.txt", header=TRUE) <BR>
+a3 <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/walker_lake_u.txt", header=TRUE) <BR>
+a4 <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/soil.txt", header=TRUE) <BR>
+a5 <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/o3.txt", header=TRUE) <BR>
+a6 <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/soil_complete.txt", header=TRUE)  <BR>
+a7 <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/coal_ash.txt", header=TRUE) <BR>
+a8 <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/broom_barn_data.txt", header=TRUE) <BR> 
+a9 <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/nc_sids.txt", header=TRUE)  <BR>
+a10 <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/unemp_data.txt", header=TRUE)  <BR>
+
+a11 <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/nc_sids_data.txt", header=TRUE)  <BR>
+
+a12 <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/nc_seats.txt", header=TRUE)  <BR>
+
+a13 <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/parana.txt", header=TRUE)  <BR>
+
+a14 <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/jura.txt", header=TRUE)  <BR>
+
+a15 <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/o3.txt", header=TRUE)  <BR>
+
+a16 <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/coal_ash.txt", header=TRUE)  <BR>
+
+a17 <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/elevation.txt", header=TRUE)  <BR>
+
+a18 <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/kruger_park_rainfall.txt", header=TRUE)  <BR>
+
+a19 <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/ca_elections_results_2012.txt", header=TRUE)  <BR>
+
+a20 <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/la_data.txt", header=TRUE)  <BR>
+
+
+<!--
+-->
+<H3> <P> Labs </P> </H3>
+<LI> <a href="stat_c173_c273_lab1.pdf"> 1. Lab 1 - Due on Wednesday, 21 January. </a><BR>
+
+<LI> <a href="lab1_answers.txt"> 2. Lab 1 - answers. </a><BR>
+
+<LI> <a href="distance_matrix1.txt"> 3. Distance matrix. </a><BR>
+
+<LI> <a href="lab2_w15.txt"> 4. Lab 2 (solutions are included). </a><BR>
+
+<LI> <a href="stat_c173_c273_lab3.pdf"> 5. Lab 3 - Due on Friday, 06 February. </a><BR>
+
+
+<LI> <a href="lab3_w15_simulations.txt"> 6. Lab 3 - solutions. </a><BR>
+
+
+<LI> <a href="stat_c173_c273_lab4.pdf"> 7. Lab 4 - Due on Wednesday, 11 February. </a><BR>
+
+
+<LI> <a href="lab4_w15_sol.txt"> 8. Lab 4 - solutions. </a><BR>
+
+
+<LI> <a href="stat_c173_c273_lab5_w15.pdf"> 9. Lab 5. </a><BR>
+
+
+<LI> <a href="stat_c173_c273_lab5_w15_sol.txt"> 10. Lab 5 - solutions. </a><BR>
+
+
+
+
+
+
+
+
+
+<H3> <P> Handouts </P> </H3>
+
+<LI> <a href="c173c273_lec1.pdf"> 1. Introduction. </a><BR>
+
+
+<LI> <a href="c173c273_lec2.pdf"> 2. Spatial statistics. </a><BR>
+
+
+<LI> <a href="c173c273_lec3.pdf"> 3. The variogram. </a><BR>
+
+<LI> <a href="c173c273_lec4.pdf"> 4. Computing the variogram using geoR. </a><BR>
+
+
+<LI> <a href="c173_c273_multivariate_normal.pdf"> 5. Multivariatre normal distribution. </a><BR>
+
+
+<LI> <a href="cho_gimpel_2007_prospecting_for_campaign_gold_AJPS.pdf"> 6.   Application of
+geostatistics in Political Science. </a><BR>
+
+<LI> <a href="c173c273_lec5.pdf"> 7. More on variogram. </a><BR>
+
+<LI> <a href="c173c273_lec7a_circ_cub.pdf"> 8. More variograms. </a><BR>
+
+
+<LI> <a href="cressie_85a.pdf"> 9. Fitting a model variogram - Noel Cressie (1985). </a><BR>
+
+
+<LI> <a href="c173_c273_lec8a_s09.pdf"> 10. Fitting a model variogram. </a><BR>
+
+<LI> <a href="geoR_soil_data_fitting.txt"> 11. Fitting a model variogram - R code. </a><BR>
+
+<LI> <a href="variograms.txt"> 12. R code to graph some model variograms. </a><BR>
+
+
+<LI> <a href="stat_c173_c273_exam1_w15.pdf"> 13. Exam 1. </a><BR>
+
+
+<LI> <a href="c173c273_lec6.pdf"> 14. Data with trend. </a><BR>
+
+
+<LI> <a href="c173c273_simul_chol_manual.txt"> 15.  Simulations using Cholesky decomposition - example. </a><BR>
+
+
+<LI> <a href="simulations1_geoR.txt"> 16.  Simulations using the grf function of geoR - example. </a><BR>
+
+
+<LI> <a href="simulated_data_maps1.txt"> 17.  Simulations using geoR and the maps packages. </a><BR>
+
+
+<LI> <a href="spatial_data_sources.txt"> 18.  Spatial data sources. </a><BR>
+
+
+<LI> <a href="c173c273_lec7.pdf"> 19. Working with gstat. </a><BR>
+
+
+<LI> <a href="c173_c273_anisotropy.pdf"> 20.  Geometric anisotropy. </a><BR>
+
+
+<LI> <a href="anisotropy_plot.pdf"> 21.   Anisotropy plot. </a><BR>
+
+
+<LI> <a href="aniso.txt"> 22.  Geometric anisotropy - calculations. </a><BR>
+
+
+
+<LI> <a href="anisotropy.pdf"> 23.  Anisotropy paper. </a><BR>
+
+
+<LI> <a href="c173c273_variogram_models.pdf"> 24.  Variogram models - summary. </a><BR>
+
+
+<LI> <a href="c173c273_spatial_prediction.pdf"> 25.  Spatial prediction. </a><BR>
+
+
+<LI> <a href="idw_example.txt"> 25.   Inverse distance interpolation - with contours. </a><BR>
+
+
+<LI> <a href="c173c273_lec10.pdf"> 26.  Ordinary kriging in terms of variogram. </a><BR>
+
+
+<LI> <a href="c173c273_lec10a.pdf"> 27.  Ordinary kriging in terms of covariance. </a><BR>
+
+
+<LI> <a href="c173c273_lec11_w11.pdf"> 28.  Ordinary kriging using geoR and gstat. </a><BR>
+
+
+<LI> <a href="kriging_using_variogram.txt"> 29.  Short R code for ordinary kriging in
+terms of variogram. </a><BR>
+
+<LI> <a href="kriging_using_covariance.txt"> 30.  Short R code for ordinary kriging in
+terms of covariance. </a><BR>
+
+
+<LI> <a href="kriging_1.txt"> 31.  Data file kriging_1.txt for handouts 29 and 30. </a><BR>
+
+
+<LI> <a href="kriging_11.txt"> 32.  Data file kriging_11.txt for handouts 29 and 30. </a><BR>
+
+
+<LI> <a href="stat_c173_c273_ok_matrix.pdf"> 33.  Ordinary kriging in matrix form. </a><BR>
+
+<LI> <a href="stat_c173_c273_some_matrix_algebra.pdf"> 34.  Kriging is an
+exact interpolator. </a><BR>
+
+
+<LI> <a href="c173c273_lec12.pdf"> 34. Effect of variogram parameters on kriging weights. </a><BR>
+
+<LI> <a href="c173c273_lec13.pdf"> 35.  Cross validation. </a><BR>
+
+<LI> <a href="cross_valid.txt"> 36.  Cross-validation using geoR and gstat - example. </a><BR>
+
+
+<LI> <a href="stat_c173_c273_exam2_w14.pdf"> 37.  Practice exam 2. </a><BR>
+
+
+<LI> <a href="stat_c173_c273_exam2_w15.pdf"> 38.  Exam 2 - Problems 1 and 3 are due
+today (1pm).  Problems 2 and 4 are due by Monday 10 am.  Good luck! </a><BR>
+
+
+<LI> <a href="c173c273_lec17.pdf"> 39.  Assign "NA" values. </a><BR>
+
+
+<LI> <a href="simple_kriging_using_covariance.txt"> 40.  Simple kriging - R code.</a><BR>
+
+
+<LI> <a href="simple_kriging.txt"> 41.  Simple kriging - with geoR and gstat.</a><BR>
+
+
+<LI> <a href="log_normal_ok.R"> 42. Lognormal ordinary kriging - R code.</a><BR>
+
+
+<LI> <a href="kriging_variog_exact_interpolator.txt"> 43.  Kriging is an exact
+interpolator. </a><BR>
+
+
+<LI> <a href="geoR_gstat_dif.txt"> 44.  Check geoR and gstat for exact interpolation calculations!  </a><BR>
+
+
+<LI> <a href="c173c273_universal_kriging.pdf"> 45.  Universal kriging. </a><BR>
+
+
+<LI> <a href="cross_valid_universal_ordinary.txt"> 46.  Cross-validation: comparing
+ordinary with univesrsal kriging - example. </a><BR>
+
+<LI> <a href="c173c273_lec15_w14.pdf"> 47.  Cokriging. </a><BR>
+
+<LI> <a href="cokriging_extra.pdf"> 48.  Cokriging - extra notes. </a><BR>
+
+<LI> <a href="compare_ordinary_co_kriging.txt"> 49.  Cross validation:  Comparing ordinary with cokriging. </a><BR>
+
+<LI> <a href="cokriging_three_variables.txt"> 50.  Cokriging:  Target variable plus two colocated
+variables - example. </a><BR>
+
+
+<LI> <a href="c173c273_lec16_w11.pdf"> 51.  Block kriging. </a><BR>
+
+<LI> <a href="stein_universal_cokriging.pdf"> 52.  Universal kriging and cokriging as a regression
+procedure (paper by Stein and Cornsten). </a><BR>
+
+
+
+<LI> <a href="cressie_FRK.pdf"> 53.  Fixed rank kriging
+(paper by Cressie and Johannesson). </a><BR>
+
+
+<LI> <a href="indicator.txt"> 54.  Indicator kriging. </a><BR>
+
+<LI> <a href="stat_c173_c273_kriging_revisited.pdf"> 55.  Kriging revisited. </a><BR>
+
+
+
+
+
+<!--
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/c173c273_lec15_w14.pdf"> 51.  Cokriging. </a><BR>
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/cokriging_extra.pdf"> 52.  Cokriging - extra notes. </a><BR>
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/compare_ordinary_co_kriging.txt"> 53.  Cross validation:  Comparing ordinary with cokriging. </a><BR>
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/cokriging_three_variables.txt"> 54.  Cokriging:  Target variable plus two colocated
+variables - example. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/c173c273_lec16_w11.pdf"> 55.  Block kriging. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/stein_universal_cokriging.pdf"> 56.  Universal kriging and cokriging as a regression
+procedure (paper by Stein and Cornsten). </a><BR>
+
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/cressie_FRK.pdf"> 57.  Fixed rank kriging
+(paper by Cressie and Johannesson). </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/indicator.txt"> 58.  Indicator kriging. </a><BR>
+
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/sequential_simulations.txt"> 59. Sequential simulations. </a><BR>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/distance_matrix.txt"> 9. R code for computing the distance matrix. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/statc173c273_sids_data.pdf"> 10. North Carolina SIDS data. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/stat_c173_c273_lab_jura.pdf"> 11. Jura data set. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/jura_lab.txt"> 12. Jura lab R commands. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/c173c273_lec6.pdf"> 13. Data with trend. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/c173c273_simul_chol_manual.txt"> 14.  Simulations using Cholesky decomposition - example. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/simulations1_geoR.txt"> 15.  Simulations using the grf function of geoR - example. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/simulated_data_maps1.txt"> 16.  Simulations using geoR and the maps packages. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/c173c273_lec7.pdf"> 17. Working with gstat. </a><BR>
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/c173_c273_anisotropy.pdf"> 18.  Geometric anisotropy. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/aniso.txt"> 19.  Geometric anisotropy - calculations. </a><BR>
+
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/anisotropy.pdf"> 20.  Anisotropy paper. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/c173c273_variogram_models.pdf"> 21.  Variogram models - summary. </a><BR>
+
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/cho_gimpel_2007_prospecting_for_campaign_gold_AJPS.pdf"> 22.   Application of geostatistics in
+Political Science. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/c173c273_lec9.pdf"> 23.  Spatial prediction. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/idw.txt"> 24.  R commands for creating raster map and adding contours (see also handout # 23). </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/c173c273_lec10.pdf"> 25.  Ordinary kriging in terms of variogram. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/c173c273_lec10a.pdf"> 26.  Ordinary kriging in terms of covariance. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/stat_c173_c273_exam1_w13.pdf"> 27.  Practice exam. </a><BR>
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/exam1_w13.txt"> 27.  Practice exam - solutions. </a><BR>
+
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/c173c273_lec11_w11.pdf"> 28.  Ordinary kriging using geoR and gstat. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/kriging_using_variogram.txt"> 29.  Short R code for ordinary kriging in terms of variogram. </a><BR>
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/kriging_using_covariance.txt"> 30.  Short R code for ordinary kriging in terms of covariance. </a><BR>
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/kriging_1.txt"> 31.  Data file kriging_1.txt for handouts 29 and 30. </a><BR>
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/kriging_11.txt"> 32.  Data file kriging_11.txt for handouts 29 and 30. </a><BR>
+
+
+
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/c173c273_lec12.pdf"> 33. Effect of variogram parameters on kriging weights. </a><BR>
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/c173c273_lec13.pdf"> 34.  Cross validation. </a><BR>
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/cross_valid.txt"> 35.  Cross-validation using geoR and gstat - example. </a><BR>
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/c173c273_lec17.pdf"> 36.  Assign "NA" values. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/stat_c173_c273_exam1_w14.pdf"> 37.  Exam 1.  Good luck!!! </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/c173_c273_exam1_w14_sol.txt"> 38.  Exam 1 - solutions.</a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/simple_kriging_using_covariance.txt"> 39.  Simple kriging - R code.</a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/simple_kriging.txt"> 40.  Simple kriging - with geoR and gstat.</a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/log_normal_ok.R"> 41. Lognormal ordinary kriging - R code.</a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/kriging_variog_exact_interpolator.txt"> 42.  Kriging is an exact interpolator. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/geoR_gstat_dif.txt"> 43.  Check geoR and gstat for exact interpolation calculations!  </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/shape_files.txt"> 45.  How to read shapefiles in R.  You also need the next three
+files in the same directory. </a><BR>
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/rainfall_stations.dbf"> 45.  .dbf file. </a><BR>
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/rainfall_stations.shp"> 46.  .shp file. </a><BR>
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/rainfall_stations.shx"> 47.  .shx file. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/c173c273_lec14_w11.pdf"> 48.  Universal kriging. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/cross_valid_universal_ordinary.txt"> 49.  Cross-validation: comparing
+ordinary with univesrsal kriging - example. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/stat_c173_c273_exam2_w14.pdf"> 50.  Exam 2.  Good luck!!! </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/c173c273_lec15_w14.pdf"> 51.  Cokriging. </a><BR>
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/cokriging_extra.pdf"> 52.  Cokriging - extra notes. </a><BR>
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/compare_ordinary_co_kriging.txt"> 53.  Cross validation:  Comparing ordinary with cokriging. </a><BR>
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/cokriging_three_variables.txt"> 54.  Cokriging:  Target variable plus two colocated
+variables - example. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/c173c273_lec16_w11.pdf"> 55.  Block kriging. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/stein_universal_cokriging.pdf"> 56.  Universal kriging and cokriging as a regression
+procedure (paper by Stein and Cornsten). </a><BR>
+
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/cressie_FRK.pdf"> 57.  Fixed rank kriging
+(paper by Cressie and Johannesson). </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/indicator.txt"> 58.  Indicator kriging. </a><BR>
+
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/sequential_simulations.txt"> 59. Sequential simulations. </a><BR>
+
+<!--
+
+
+
+
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/contours.txt"> 37.  Add contours on the raster map. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/kriging_1_exact.txt"> 21.  Data file kriging_1.txt for handout 20. </a><BR>
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/kriging_11_exact.txt"> 22.  Data file kriging_11.txt for handout 20. </a><BR>
+
+
+
+
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/contours.txt"> 28.  Add contours on the raster map. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/simple_kriging.txt"> 29.  Simple kriging using geoR and gstat. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/c173c273_lec12_w11.pdf"> 30. Effect of variogram parameters on kriging weights. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/trimmed_function_1.txt"> 31.  Trimmed function - by Eric Braun (works with contourplot). </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/trimmed_function_2.txt"> 32.  Trimmed function - by Dave Zes (works with image function). </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/trimmed_function_2.txt"> 33.  Another trimmed function (works with image function). </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/c173c273_lec13_w11.pdf"> 34.  Cross validation. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/cross_valid.txt"> 35.  Cross-validation using geoR and gstat - example. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/c173c273_lec14_w11.pdf"> 36.  Universal kriging. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/cross_valid_universal_ordinary.txt"> 37.  Cross-validation: comparing ordinary with univesrsal kriging - example. </a><BR>
+
+
+
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/c173c273_lec16_w11.pdf"> 41.  Block kriging. </a><BR>
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/indicator.txt"> 42.  Indicator kriging. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/c173c273_lec17_w11.pdf"> 43.  Assign "NA" values. </a><BR>
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/sequential_simulations.txt"> 44. Sequential simulations. </a><BR>
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/simulated_data_maps.txt"> 45. Simulate spatial data on points using the maps 
+package. </a><BR>
+
+
+
+
+
+<!--
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/stat_c173_c273_lab_ck_w11.pdf"> 32.  Lab - Jura data set on cross validation between ordinary kriging and cokriging. </a><BR>
+
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/GRASS_R_meetup.pdf"> 34.  Notes on GRASS/R. </a><BR>
+
+
+<!--
+
+
+
+
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/stat_c173_c273_lec2.pdf"> 27. Introduction to GRASS. </a><BR>
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/stat_c173_c273_lec4.pdf"> 28. More on raster maps - georeferenced maps. </a><BR>
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/stat_c173_c273_lec5.pdf"> 29. Working with raster maps. </a><BR>
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/stat_c173_c273_lec7.pdf"> 30. Digitizing in GRASS. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/stat_c173_c273_lec9.pdf"> 31. Data interpolation. </a><BR>
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/grass_2.pdf"> 32. Georeferencing in GRASS. </a><BR>
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/stat_c173_c273_gstat_grass1.pdf"> 33. Working with R and GRASS  - example 1. </a><BR>
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/stat_c173_c273_gstat_grass2.pdf"> 34. Working with R and GRASS - example 2. </a><BR>
+-->
+
+
+<H3> <P> Homework </P> </H3>
+<H4>
+<LI> <a href="stat_c173_c273_hw1_w15.pdf"> Homework 1:  Due on Wednesday, 21 January. </a><BR>
+
+
+<LI> <a href="stat_c173_c273_hw2_w15.pdf"> Homework 2:  Due on Monday, 26 January. </a><BR>
+
+<LI> <a href="stat_c173_c273_hw3_w15.pdf"> Homework 3:  Due on Wednesday, 11 March. </a><BR>
+
+
+<LI> <a href="stat_c173_c273_hw4_w15.pdf"> Homework 4:  Due on Friday, 13 March. </a><BR>
+
+
+
+<!--
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/stat_c173_c273_hw5.pdf">Homework 5:  Due on Friday, 21 February. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/stat_c173_c273_hw6_w14_new.pdf">Homework 6:  Due on Friday, 14 March. </a><BR>
+
+
+
+
+<!--
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/stat_c173_c273_hw5_w13.pdf">Homework 5:  Due on Wednesday, 
+27 February. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/stat_c173_c273_hw6_w13.pdf">Homework 6:  Due on Friday, 15 March. </a><BR>
+
+
+
+<!--
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/stat_c173_c273_hw7_w11.pdf">Homework 7 </a><BR>
+
+
+<!--
+<!--
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/stat_c173_c273_hw5_w10.pdf">Homework 5 </a><BR>
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/stat_c173_c273_hw6_w10.pdf">Homework 6 </a><BR>
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/stat_c173_c273_hw7_w10.pdf">Homework 7 </a><BR>
+-->
+
+
+
+
+
+
+
+
+
+
+
+<!--
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/Spatial_Mini_Course_3.pdf"> Spatial data analysis using R. </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/data19810830.txt"> 1981 </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/data19820830.txt"> 1982 </a><BR>
+
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/data19830830.txt"> 1983 </a><BR>
+
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/data19840830.txt"> 1984 </a><BR>
+
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/data19850830.txt"> 1985 </a><BR>
+
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/data19860830.txt"> 1986 </a><BR>
+
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/data19870830.txt"> 1987 </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/data19880830.txt"> 1988 </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/data19890830.txt"> 1989 </a><BR>
+
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/data19900830.txt"> 1990 </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/data19910830.txt"> 1991 </a><BR>
+
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/data19920830.txt"> 1992 </a><BR>
+
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/data19930830.txt"> 1993 </a><BR>
+
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/data19940830.txt"> 1994 </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/data19950830.txt"> 1995 </a><BR>
+
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/data19960830.txt"> 1996 </a><BR>
+
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/data19970830.txt"> 1997 </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/data19980830.txt"> 1998 </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/data19990830.txt"> 1999 </a><BR>
+
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/data20000830.txt"> 2000 </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/data20010830.txt"> 2001 </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/data20020830.txt"> 2002 </a><BR>
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/data20030830.txt"> 2003 </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/data20040830.txt"> 2004 </a><BR>
+
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/data20050830.txt"> 2005 </a><BR>
+
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<H3> <P> Sample maps </P> </H3>
+<H4>
+
+The three quadrangles in the area of San Francisco (from 
+<a href="http://old.casil.ucdavis.edu/casil/gis.ca.gov/drg/"> California Digital Raster Graphics).
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/o37122g3.tiff"> Map 1 (o37122g3). </a><BR>
+
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/o37122g4.tiff"> Map 2 (o37122g4). </a><BR>
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/o37122g5.tiff"> Map 3 (o37122g5). </a><BR>
+
+<H4>
+UCLA map:
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/westwood.tiff"> Map of the UCLA area to be georeferenced. </a><BR>
+
+<H4>
+LOCATION westood2:
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/westwood2"> LOCATION westwood2 to be used in GRASS. </a><BR>
+
+
+<H4>
+Southern California map:
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/south_ca.jpg"> Map of Southern California to be digitized. </a><BR>
+<H4>
+Santa Monica map:
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/santa_monica.jpg"> Map of Santa Monica to be georeferenced and digitized. </a><BR>
+
+
+<H4>
+Data set 1:
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/data_var.txt"> Spatial data set. </a><BR>
+
+<H4>
+Data set 2:  
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/nc_sids.txt"> North Carolina SIDS data. </a><BR>
+
+
+<H4>
+Data set 2:
+<LI> <a href="http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/nc_sids_counties.txt"> North Carolina SIDS data with county seat names. </a><BR>
+
+-->
+
+
+
+
+<H3> </H3>
+Back to the Statistics Department <a href="http://www.stat.ucla.edu">
+Home</a> page. <BR>
+<H4>
+
+<!-- 
+<font
+ face="Times New Roman, Times, serif">Visitor number <img
+ src="http://counter.digits.com/wc/-d/4/nicolaschristou" align="middle"
+ border="0" height="20" hspace="2" vspace="2" width="60"> , since Jan.
+01, 2007 <br>
+</font>
+<H4>
+<UL>
+-->
+
+
+<!-- 
+<H3>Back to the Statistics Department <a href="http://www.stat.ucla.edu">
+Home</a> page.
+</H3>
+-->
+
+</BODY>
+</HTML>
+
+
+
+</UL>
+</BODY>
+</HTML>
+

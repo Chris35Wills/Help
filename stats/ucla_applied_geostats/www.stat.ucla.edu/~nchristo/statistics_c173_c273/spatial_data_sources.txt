@@ -1,0 +1,56 @@
+This is the best way to search
+http://www.ndbc.noaa.gov/radial_search.php
+(Specify lat/long, radial distance and time frame)
+
+http://www.ndbc.noaa.gov/rmd.shtml
+Click on Region of Interest
+Click on a buoy number
+Click on Meterological Observations from Nearby Stations and Ships
+(This has search fields like the first one, but with parameters filled in)
+
+Data Description--for abbreviations
+http://www.ndbc.noaa.gov/obsdes.shtml
+---------------
+
+This also has a pretty good/interesting database with more variables
+http://www.sccoos.org/interactive-map/
+
+This one is easier to navigate, but does not provide overall data tables (needs to be queried one-by-one)
+http://cdip.ucsd.edu/?&nav=historic&sub=data
+
+Animal Specimen Data - MVZ UC Berkeley
+http://arctos.database.museum/SpecimenSearch.cfm
+
+Plant Specimen Data - UC Jepson Herbarium, Berkeley
+http://www.mip.berkeley.edu/query_forms/browse_jpn.html
+
+--------------
+Other helpful Links
+
+http://maps.geog.umd.edu/metadataexplorer/explorer.jsp
+http://www.ciesin.org/download_data.html
+
+http://ncl.sbs.ohio-state.edu/5_sdata.html
+
+http://www.lat-long.com/
+
+http://www.arb.ca.gov/homepage.htm
+
+
+http://www.arb.ca.gov/aqd/aqdcd/aqdcddld.htm
+
+http://seer.cancer.gov/
+
+http://www.countyhealthrankings.org/
+
+
+http://www.epa.gov/airdata/ad_data_daily.html
+
+
+http://www.eia.gov/dnav/ng/ng_pri_sum_dcu_nus_m.htm
+
+
+http://www.narccap.ucar.edu/
+
+https://data.lacity.org/data
+

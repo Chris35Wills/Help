@@ -1,0 +1,111 @@
+#Simulations using Cholesky decomposition:
+a <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/kruger_park_rainfall.txt", header=TRUE)
+ 
+
+coord <- as.matrix(cbind(a$long, a$lat))
+
+x1 <- rep(rep(0,nrow(a)),nrow(a))             #Initialize
+dist <- matrix(x1,nrow=nrow(a),ncol=nrow(a))  #the distance matrix 
+
+for (i in 1:nrow(a)){
+	for (j in 1:nrow(a)){
+	dist[i,j]=((coord[i,1]-coord[j,1])^2+(coord[i,2]-coord[j,2])^2)^0.5
+		}
+		}
+
+
+#Specify the parameters:
+c0 <- 0
+c1 <- 0.0005
+alpha <- 1.0
+
+x1 <- rep(rep(0,nrow(a)),nrow(a))              #Initialize
+C1 <- matrix(x1,nrow=nrow(a),ncol=nrow(a))     #the C1 matrix
+
+for(i in 1:nrow(a)){
+	for (j in 1:nrow(a)){
+		C1[i,j]=c1-c1*(1.5*dist[i,j]/alpha - 0.5*dist[i,j]^3/alpha^3)
+                if(i==j){C1[i,j]=c0+c1}
+		if(dist[i,j] > 1){C1[i,j]=0}
+		}
+				}
+
+#========================================================================
+#========================================================================
+#Using Cholesky decomposition:
+L <- chol(C1)
+
+#Generate random sample form N(0,1):
+e <- rnorm(nrow(a))
+
+#Define the mean:
+mu <- 0.06
+
+#Generate the data:
+data <- mu + t(L) %*% e
+
+#Create a data frame:
+aa <- as.data.frame(cbind(a[, 2:3], data))
+
+#Save the data:
+write.table(aa, "kruger1.txt", row.names=FALSE)
+
+#Create a geodata object:
+bb <- as.geodata(aa)
+
+#Plot the data:
+quartz()
+points(bb)
+
+
+#Using spectral decomposition:
+ev <- eigen(C1)
+
+#Verify:
+qqq <- ev$vectors %*% diag(ev$values) %*% t(ev$vectors)
+
+#Get the square root matrix:
+qqqq <- ev$vectors %*% diag(ev$values^.5) %*% t(ev$vectors)
+
+#Generate random sample form N(0,1):
+e <- rnorm(nrow(a))
+
+#Define the mean:
+mu <- 0.06
+
+#Generate the data:
+data1 <- mu + qqqq %*% e
+
+#Create a data frame:
+aaa <- as.data.frame(cbind(a[, 2:3], data1))
+
+#Save the data:
+write.table(aaa, "kruger2.txt", row.names=FALSE)
+
+#Create a geodata object:
+bbb <- as.geodata(aaa)
+
+
+#Plot the data:
+quartz()
+points(bbb)
+#========================================================================
+#========================================================================
+#Using the grf function:
+#Simulating Z(s) at spatial locations s1, s2, ..., sn:
+a <- read.table("http://www.stat.ucla.edu/~nchristo/statistics_c173_c273/kruger_park_rainfall.txt", header=TRUE)
+
+xx <- as.matrix(cbind(a$long,a$lat))
+
+sim1 <- grf(grid=xx, cov.model="sph",cov.pars = c(1, 2), nugget=0.2, nsim=5)
+
+var1 <- variog(sim1)
+
+plot(var1, type="l")
+
+lines.variomodel(cov.model="sph", cov.pars = c(1, 2),nugget=0.2, max.dist=3, lwd=3)
+
+
+
+
+

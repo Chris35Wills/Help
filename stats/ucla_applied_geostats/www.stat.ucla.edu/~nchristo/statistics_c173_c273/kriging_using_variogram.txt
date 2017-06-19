@@ -1,0 +1,43 @@
+a <- read.table("kriging_1.txt", header=TRUE)
+b <- read.table("kriging_11.txt", header=TRUE)
+
+x <- as.matrix(cbind(a$x, a$y))
+
+x1 <- rep(rep(0,8),8)             #Initialize
+dist <- matrix(x1,nrow=8,ncol=8)  #the distance matrix 
+
+for (i in 1:8){
+	for (j in 1:8){
+		dist[i,j]=((x[i,1]-x[j,1])^2+(x[i,2]-x[j,2])^2)^.5		
+		}
+		}
+
+c0 <- 0
+c1 <- 10
+alpha <- 3.33
+
+x1 <- rep(rep(0,8),8)              #Initialize
+G <- matrix(x1,nrow=8,ncol=8)     #the GAMMA matrix
+
+for(i in 1:8){
+	for (j in 1:8){
+		G[i,j]=c1*(1-exp(-dist[i,j]/alpha))
+                if(i==j){G[i,j]=0}
+		if(i==8){G[i,j]=1}	
+		if(j==8){G[i,j]=1}
+		if(i==8 & j==8) {G[i,j]=0}
+				}
+				}
+
+g <- rep(0,8)                    #Initialize
+                                  #the g vector
+
+for(j in 1:8){
+	g[j]=c1*(1-exp(-dist[8,j]/alpha))
+	if(j == 8) {g[j]=1}
+		}
+
+w <- solve(G) %*% g          #Obtain the weights and the Lagrange parameter
+
+z_hat <- w[-8] %*% b$z         #Compute the estimate
+var_z_hat <- t(w) %*% g  #Compute the variance of the estimate 
